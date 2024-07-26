@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ILuvBook</string>
+    <string name="onboardingTitle">난이도 설정</string>
+    <string name="onboarding_content">선택된 나이에 따라 교과 과정에 맞는\n동화 생성, 퀴즈, 단어장이 만들어져요</string>
 </resources>

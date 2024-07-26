@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    온보딩 타이틀-->
+    <style name="OnboardingTitle">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">22sp</item>
+        <item name="color">#1F2021</item>
+    </style>
+
+    <!--    온보딩 타이틀-->
+    <style name="OnboardingContent">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="color">#6F7075</item>
+    </style>
+
+</resources>
