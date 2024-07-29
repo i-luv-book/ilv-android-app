@@ -7,6 +7,7 @@ import com.sangik.iluvbook.BR
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.base.BaseActivity
 import com.sangik.iluvbook.databinding.ActivityMainBinding
+import com.sangik.iluvbook.util.ActivityUtil
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     R.layout.activity_main,
@@ -18,7 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
         super.initListener()
 
         binding.buttonShowToast.setOnClickListener {
-            Toast.makeText(this, "Hello I Luv Book!", Toast.LENGTH_LONG).show()
+            val activity = ActivityUtil()
+            activity.startOnboardingActivity(this)
         }
     }
 }
