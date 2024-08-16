@@ -4,6 +4,12 @@
     <string name="onboarding_content">선택된 나이에 따라 교과 과정에 맞는\n동화 생성, 퀴즈, 단어장이 만들어져요</string>
     <string name="fairy_tale_creation_title">동화 만들기</string>
     <string name="fairytale_creation_question_who">누구/무엇에 관한 이야기면 좋겠나요?</string>
+    <string name="fairytale_creation_question_name">주인공의 이름은 뭔가요?</string>
     <string name="fairytale_creation_question_where">어디서 일어나는 일인가요?</string>
-    <string name="fairytale_creation_question_genre">어떤 세계를 탐험하고 싶나요?</string>
+    <string name="fairytale_creation_question_world">어떤 세계를 탐험하고 싶나요?</string>
+    <string name="fairytale_creation_question_who_guide">주인공 정하기 (2개)</string>
+    <string name="fairytale_creation_question_name_guide">이름 정하기 (2개)</string>
+    <string name="fairytale_creation_question_where_guide">배경 정하기 (2개)</string>
+    <string name="fairytale_creation_question_genre_guide">장르 정하기 (1개)</string>
+    <string name="create_optional_fairy_tale">선택형 동화 만들기</string>
 </resources>
