@@ -15,4 +15,25 @@
         <item name="color">#6F7075</item>
     </style>
 
+
+<!--    동화 만들기-->
+    <style name="FairyTaleCreationTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <style name="FairyTaleCreationQuestion">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <style name="FairyTaleCreationGuide">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#6F7075</item>
+    </style>
+
+
 </resources>
