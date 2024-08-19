@@ -5,7 +5,7 @@
     <data>
         <variable
             name="chipItem"
-            type="com.sangik.iluvbook.view.fairytalecreation.FairyTaleCreationViewModel" />
+            type="com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel" />
     </data>
     <com.google.android.material.chip.Chip
         android:layout_width="wrap_content"

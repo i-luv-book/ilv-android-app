@@ -2,7 +2,7 @@ package com.sangik.iluvbook.util
 
 import android.app.Activity
 import android.content.Intent
-import com.sangik.iluvbook.view.onboarding.OnboardingActivity
+import com.sangik.iluvbook.onboarding.ui.OnboardingActivity
 
 class ActivityUtil {
     fun startOnboardingActivity(activity: Activity){

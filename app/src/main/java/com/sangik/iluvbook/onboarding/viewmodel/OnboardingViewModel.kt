@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.view.onboarding
+package com.sangik.iluvbook.onboarding.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

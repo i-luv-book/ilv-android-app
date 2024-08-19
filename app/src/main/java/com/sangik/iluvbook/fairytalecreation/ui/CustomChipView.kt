@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.view.fairytalecreation
+package com.sangik.iluvbook.fairytalecreation.ui
 
 import android.content.Context
 import android.util.AttributeSet
