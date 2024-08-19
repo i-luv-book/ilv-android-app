@@ -1,10 +1,10 @@
-package com.sangik.iluvbook.view.fairytalecreation
+package com.sangik.iluvbook.fairytalecreation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.base.BaseViewModel
+import com.sangik.iluvbook.fairytalecreation.ui.CustomChipView
 
 class FairyTaleCreationViewModel : BaseViewModel(){
 

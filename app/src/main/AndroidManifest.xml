@@ -15,10 +15,10 @@
         android:theme="@style/Theme.ILuvBook"
         tools:targetApi="31">
         <activity
-            android:name=".view.onboarding.OnboardingActivity"
+            android:name=".onboarding.ui.OnboardingActivity"
             android:exported="false" />
         <activity
-            android:name=".view.main.MainActivity"
+            android:name=".main.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

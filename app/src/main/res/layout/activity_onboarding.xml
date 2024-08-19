@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.onboarding.OnboardingActivity">
+    tools:context=".onboarding.ui.OnboardingActivity">
 
     <data>
         <variable
             name="onboardingViewModel"
-            type="com.sangik.iluvbook.view.onboarding.OnboardingViewModel" />
+            type="com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel" />
     </data>
 
     <FrameLayout

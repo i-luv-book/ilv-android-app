@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.view.fairytalecreation
+package com.sangik.iluvbook.fairytalecreation.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
-import com.sangik.iluvbook.view.onboarding.OnboardingViewModel
+import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
+import com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel
 
 class FairyTaleCreationFragment : Fragment() {
 

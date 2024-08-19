@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.view.onboarding
+package com.sangik.iluvbook.onboarding.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,8 @@ import com.sangik.iluvbook.BR
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.base.BaseActivity
 import com.sangik.iluvbook.databinding.ActivityOnboardingBinding
-import com.sangik.iluvbook.view.fairytalecreation.FairyTaleCreationFragment
+import com.sangik.iluvbook.fairytalecreation.ui.FairyTaleCreationFragment
+import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
 
 class OnboardingActivity : BaseActivity<ActivityOnboardingBinding, OnboardingViewModel>(
     R.layout.activity_onboarding,
