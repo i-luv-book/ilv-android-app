@@ -35,5 +35,18 @@
         <item name="android:textColor">#6F7075</item>
     </style>
 
+    <!--    행맨-->
+
+    <style name="HangmanIntroTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <style name="HangmanIntroContent">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#98989E</item>
+    </style>
 
 </resources>

@@ -17,6 +17,7 @@ import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
 import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel
+import com.sangik.iluvbook.hangman.intro.IntroHangmanFragment
 
 class FairyTaleCreationFragment : Fragment() {
 
@@ -104,6 +105,24 @@ class FairyTaleCreationFragment : Fragment() {
         initAddButtonListener()
         initCancelClickListener()
         initCreateButtonListener()
+        initCreateFairyTaleButtonListener()
+    }
+
+    // 행맨 게임 인트로 이동
+    private fun initCreateFairyTaleButtonListener() {
+        binding.btnCreate.setOnClickListener {
+            navigateToHangmanFragment()
+        }
+    }
+
+    // 행맨 인트로 이동
+    private fun navigateToHangmanFragment(){
+        val fragment = IntroHangmanFragment()
+
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.onboarding_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     // 추가 버튼 클릭 리스너
