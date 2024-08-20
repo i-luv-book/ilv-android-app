@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".hangman.intro.IntroHangmanFragment">
+    tools:context=".hangman.intro.ui.IntroHangmanFragment">
 
     <data>
         <variable
             name="introHangmanViewModel"
-            type="com.sangik.iluvbook.hangman.viewmodel.IntroHangmanViewModel" />
+            type="com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

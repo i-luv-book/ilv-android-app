@@ -17,7 +17,7 @@ import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
 import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel
-import com.sangik.iluvbook.hangman.intro.IntroHangmanFragment
+import com.sangik.iluvbook.hangman.intro.ui.IntroHangmanFragment
 
 class FairyTaleCreationFragment : Fragment() {
 

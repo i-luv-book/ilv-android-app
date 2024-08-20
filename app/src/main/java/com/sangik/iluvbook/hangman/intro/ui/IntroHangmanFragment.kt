@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.hangman.intro
+package com.sangik.iluvbook.hangman.intro.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentIntroHangmanBinding
-import com.sangik.iluvbook.hangman.viewmodel.IntroHangmanViewModel
+import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
 class IntroHangmanFragment : Fragment() {
 

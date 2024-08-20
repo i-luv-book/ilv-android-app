@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.hangman.viewmodel
+package com.sangik.iluvbook.hangman.intro.viewmodel
 
 import com.sangik.iluvbook.base.BaseViewModel
 
