@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentIntroHangmanBinding
+import com.sangik.iluvbook.hangman.game.ui.HangmanFragment
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
 class IntroHangmanFragment : Fragment() {
@@ -27,7 +28,19 @@ class IntroHangmanFragment : Fragment() {
             inflater, R.layout.fragment_intro_hangman, container, false
         )
 
+        initListener()
         return binding.root
+    }
+
+    private fun initListener() {
+        binding.start.setOnClickListener {
+            val fragment = HangmanFragment()
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.hangman_intro_frame, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
 }
