@@ -12,4 +12,8 @@
     <string name="fairytale_creation_question_where_guide">배경 정하기 (2개)</string>
     <string name="fairytale_creation_question_genre_guide">장르 정하기 (1개)</string>
     <string name="create_optional_fairy_tale">선택형 동화 만들기</string>
+    <string name="hangman_intro_not_funny">여러분 알고계셨나요?\n사과엔 눈이 없어요 하하하</string>
+    <string name="hangman_intro_title">두구두구\n어떤 동화책이 만들어질까?</string>
+    <string name="hangman_intro_banner_image">hangman intro banner image</string>
+    <string name="game_start_button">game start button</string>
 </resources>
