@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".hangman.game.ui.HangmanFragment">
+
+    <data>
+        <variable
+            name="hangmanViewModel"
+            type="com.sangik.iluvbook.hangman.game.viewmodel.HangmanViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F7F8FA">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/chevron_back"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hangman_game_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="74dp"
+                android:text="Hangman Time!"
+                android:textAppearance="@style/HangmanGameTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hangman_game_content"
+                style="@style/HangmanIntroContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="멋진 동화책이 만들어지고 있어요\nHangman 게임을 하며 기다려볼까요?"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hangman_game_title" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/hint_card"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:elevation="12.9dp"
+                app:cardCornerRadius="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hangman_game_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/hm_hint_chip" />
+
+                <TextView
+                    android:id="@+id/hangman_game_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="70dp"
+                    android:text="@{hangmanViewModel.hint}"
+                    android:textAppearance="@style/HangmanGameHint" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/game_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hangman_game_great"
+                android:visibility="gone"
+                android:elevation="102dp"
+                android:translationZ="100dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintTop_toTopOf="@id/hint_card"
+                app:layout_constraintBottom_toBottomOf="@id/hint_card"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/input_word_frame"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="24dp"
+                app:flexWrap="wrap"
+                app:justifyContent="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hint_card"
+                app:layout_constraintWidth_percent="0.9">
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <FrameLayout
+                android:id="@+id/hangman_frame"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="33dp"
+                android:layout_marginBottom="22dp"
+                app:layout_constraintBottom_toTopOf="@id/keyboard_flex"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_word_frame"
+                app:layout_constraintWidth_percent="0.87">
+
+                <ImageView
+                    android:id="@+id/hangman"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/hm_0" />
+
+            </FrameLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/keyboard_flex"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="8dp"
+                app:flexWrap="wrap"
+                app:justifyContent="center"
+                app:layout_constraintWidth_percent="0.91"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_move_fairytale"
+                app:layout_constraintTop_toBottomOf="@id/hangman_frame">
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <ImageButton
+                android:id="@+id/btn_move_fairytale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_move_fairytale_inactive"
+                app:layout_constraintWidth_percent="0.91"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/keyboard_flex"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</layout>
