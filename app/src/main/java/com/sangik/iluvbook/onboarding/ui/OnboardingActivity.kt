@@ -6,7 +6,7 @@ import com.sangik.iluvbook.BR
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.base.BaseActivity
 import com.sangik.iluvbook.databinding.ActivityOnboardingBinding
-import com.sangik.iluvbook.fairytalecreation.ui.FairyTaleCreationFragment
+import com.sangik.iluvbook.fairytale.creation.ui.FairyTaleCreationFragment
 import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
 
 class OnboardingActivity : BaseActivity<ActivityOnboardingBinding, OnboardingViewModel>(

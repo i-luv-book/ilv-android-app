@@ -1,7 +1,7 @@
-package com.sangik.iluvbook.repository
+package com.sangik.iluvbook.network.repository
 
 import com.sangik.iluvbook.hangman.game.model.HangmanResponse
-import com.sangik.iluvbook.hangman.game.model.HangmanService
+import com.sangik.iluvbook.network.service.HangmanService
 
 class HangmanRepository(private val apiService: HangmanService) {
     suspend fun fetchWord(): HangmanResponse? {
