@@ -12,12 +12,12 @@ import android.widget.ImageButton
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
-import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
+import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
-import com.sangik.iluvbook.hangman.intro.ui.IntroHangmanFragment
 
 class FairyTaleCreationFragment : Fragment() {
 
@@ -111,18 +111,8 @@ class FairyTaleCreationFragment : Fragment() {
     // 행맨 게임 인트로 이동
     private fun initCreateFairyTaleButtonListener() {
         binding.btnCreate.setOnClickListener {
-            navigateToHangmanFragment()
+            findNavController().navigate(R.id.action_fairyTaleCreationFragment_to_introHangmanFragment)
         }
-    }
-
-    // 행맨 인트로 이동
-    private fun navigateToHangmanFragment(){
-        val fragment = IntroHangmanFragment()
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.onboarding_container, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 
     // 추가 버튼 클릭 리스너

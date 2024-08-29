@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/fairyTaleCreationFragment"
+        android:name="com.sangik.iluvbook.fairytale.creation.ui.FairyTaleCreationFragment"
+        android:label="fragment_fairy_tale_creation"
+        tools:layout="@layout/fragment_fairy_tale_creation" >
+
+        <action
+            android:id="@+id/action_fairyTaleCreationFragment_to_introHangmanFragment"
+            app:destination="@id/introHangmanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/hangmanFragment"
+        android:name="com.sangik.iluvbook.hangman.game.ui.HangmanFragment"
+        android:label="fragment_hangman"
+        tools:layout="@layout/fragment_hangman" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sangik.iluvbook.home.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.sangik.iluvbook.fairytale.onboarding.ui.OnboardingFragment"
+        android:label="fragment_onboarding"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_fairyTaleCreationFragment"
+            app:destination="@id/fairyTaleCreationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introHangmanFragment"
+        android:name="com.sangik.iluvbook.hangman.intro.ui.IntroHangmanFragment"
+        android:label="fragment_intro_hangman"
+        tools:layout="@layout/fragment_intro_hangman" >
+        <action
+            android:id="@+id/action_introHangmanFragment_to_hangmanFragment"
+            app:destination="@id/hangmanFragment" />
+    </fragment>
+
+
+</navigation>
