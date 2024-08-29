@@ -16,9 +16,6 @@
         android:theme="@style/Theme.ILuvBook"
         tools:targetApi="31">
         <activity
-            android:name=".onboarding.ui.OnboardingActivity"
-            android:exported="false" />
-        <activity
             android:name=".main.ui.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 // local.properties 파일 로드
@@ -56,7 +57,9 @@ android {
 }
 
 dependencies {
-
+    val nav_version = "2.7.7"
+    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // flexbox
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
