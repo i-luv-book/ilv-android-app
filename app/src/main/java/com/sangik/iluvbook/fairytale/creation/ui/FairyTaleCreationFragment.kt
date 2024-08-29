@@ -2,6 +2,7 @@ package com.sangik.iluvbook.fairytale.creation.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +69,7 @@ class FairyTaleCreationFragment : Fragment() {
     // 난이도 설정 관련 텍스트 (추후 API 연결시 사용)
     private fun setupObserver() {
         onboardingViewModel.selectedLevel.observe(viewLifecycleOwner) { level ->
+            Log.d("asdf" , level.toString())
             binding.selectedLevel.text = level
         }
     }
