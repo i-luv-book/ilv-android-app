@@ -47,6 +47,13 @@ android {
         getByName("release") {
             buildConfigField("String", "BASE_URL", "\"${localProperties["BASE_URL"]}\"")
         }
+
+        getByName("debug") {
+            buildConfigField("String", "THUMBNAIL_TEST_IMG_URL", "\"${localProperties["THUMBNAIL_TEST_IMG_URL"]}\"")
+        }
+        getByName("release") {
+            buildConfigField("String", "THUMBNAIL_TEST_IMG_URL", "\"${localProperties["THUMBNAIL_TEST_IMG_URL"]}\"")
+        }
     }
 
     compileOptions {
