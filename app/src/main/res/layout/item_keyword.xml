@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="keyword"
+            type="String" />
+    </data>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:background="@drawable/background_keyword"
+        android:text="@{keyword}"
+        android:textAppearance="@style/fairytale_intro_summary_keyword"
+        android:padding="8dp"/>
+</layout>

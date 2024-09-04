@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentIntroHangmanBinding
-import com.sangik.iluvbook.hangman.game.ui.HangmanFragment
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
 class IntroHangmanFragment : Fragment() {
@@ -34,12 +34,7 @@ class IntroHangmanFragment : Fragment() {
 
     private fun initListener() {
         binding.start.setOnClickListener {
-            val fragment = HangmanFragment()
-
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.hangman_intro_frame, fragment)
-                .addToBackStack(null)
-                .commit()
+            findNavController().navigate(R.id.action_introHangmanFragment_to_hangmanFragment)
         }
     }
 

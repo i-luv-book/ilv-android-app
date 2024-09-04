@@ -11,14 +11,4 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(
     R.layout.activity_main,
     MainViewModel::class,
     BR.mainViewModel
-) {
-
-    override fun initListener() {
-        super.initListener()
-
-        binding.buttonShowToast.setOnClickListener {
-            val activity = ActivityUtil()
-            activity.startOnboardingActivity(this)
-        }
-    }
-}
+) {}

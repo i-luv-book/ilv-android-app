@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fairytalecreation.ui.FairyTaleCreationFragment">
+    tools:context=".fairytale.creation.ui.FairyTaleCreationFragment">
 
     <data>
         <variable
             name="fairyTaleCreationViewModel"
-            type="com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel"/>
+            type="com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel"/>
     </data>
 
     <ScrollView

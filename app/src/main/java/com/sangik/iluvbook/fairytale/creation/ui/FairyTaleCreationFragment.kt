@@ -1,7 +1,8 @@
-package com.sangik.iluvbook.fairytalecreation.ui
+package com.sangik.iluvbook.fairytale.creation.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,12 @@ import android.widget.ImageButton
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
-import com.sangik.iluvbook.onboarding.viewmodel.OnboardingViewModel
-import com.sangik.iluvbook.fairytalecreation.viewmodel.FairyTaleCreationViewModel
-import com.sangik.iluvbook.hangman.intro.ui.IntroHangmanFragment
+import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
+import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
 
 class FairyTaleCreationFragment : Fragment() {
 
@@ -68,6 +69,7 @@ class FairyTaleCreationFragment : Fragment() {
     // 난이도 설정 관련 텍스트 (추후 API 연결시 사용)
     private fun setupObserver() {
         onboardingViewModel.selectedLevel.observe(viewLifecycleOwner) { level ->
+            Log.d("asdf" , level.toString())
             binding.selectedLevel.text = level
         }
     }
@@ -111,18 +113,8 @@ class FairyTaleCreationFragment : Fragment() {
     // 행맨 게임 인트로 이동
     private fun initCreateFairyTaleButtonListener() {
         binding.btnCreate.setOnClickListener {
-            navigateToHangmanFragment()
+            findNavController().navigate(R.id.action_fairyTaleCreationFragment_to_introHangmanFragment)
         }
-    }
-
-    // 행맨 인트로 이동
-    private fun navigateToHangmanFragment(){
-        val fragment = IntroHangmanFragment()
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.onboarding_container, fragment)
-            .addToBackStack(null)
-            .commit()
     }
 
     // 추가 버튼 클릭 리스너

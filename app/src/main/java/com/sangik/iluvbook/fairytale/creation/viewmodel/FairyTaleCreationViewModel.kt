@@ -1,12 +1,28 @@
-package com.sangik.iluvbook.fairytalecreation.viewmodel
+package com.sangik.iluvbook.fairytale.creation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.base.BaseViewModel
-import com.sangik.iluvbook.fairytalecreation.ui.CustomChipView
+import com.sangik.iluvbook.fairytale.creation.ui.CustomChipView
+import com.sangik.iluvbook.fairytale.model.dto.FairyTaleRequest
+import com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse
+import com.sangik.iluvbook.fairytale.model.dto.Keywords
+import com.sangik.iluvbook.network.RetrofitClient
+import com.sangik.iluvbook.network.repository.FairyTaleRepository
+import com.sangik.iluvbook.network.repository.HangmanRepository
+import com.sangik.iluvbook.network.service.FairyTaleService
+import kotlinx.coroutines.launch
 
 class FairyTaleCreationViewModel : BaseViewModel(){
+
+    private lateinit var repository : FairyTaleRepository
+
+    suspend fun createFairyTale(difficulty: String, request: FairyTaleRequest): FairyTaleResponse? {
+        return repository.createFairyTale(difficulty, request)
+    }
 
     // 선택된 Chip Id 저장
     private val selectedChipGroups = List(4) {MutableLiveData<Set<Int>>(emptySet()) }

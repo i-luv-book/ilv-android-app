@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sangik.iluvbook.base.BaseViewModel
-import com.sangik.iluvbook.hangman.game.model.HangmanService
+import com.sangik.iluvbook.network.service.HangmanService
 import com.sangik.iluvbook.network.RetrofitClient
-import com.sangik.iluvbook.repository.HangmanRepository
+import com.sangik.iluvbook.network.repository.HangmanRepository
 import kotlinx.coroutines.launch
 
 class HangmanViewModel : BaseViewModel() {
