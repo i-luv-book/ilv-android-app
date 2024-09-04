@@ -39,18 +39,15 @@ class OnboardingFragment : Fragment() {
 
     private fun initListener() {
         with(binding) {
-            btnLow.setOnClickListener{ onLevelSelected("low") } // 난이도 선택 : 영유아
-            btnMid.setOnClickListener{ onLevelSelected("mid") } // 난이도 선택 : 초등학교 저학년
-            btnHigh.setOnClickListener{ onLevelSelected("high") } // 난이도 선택 : 초등학교 저학년
+            btnLow.setOnClickListener{ navigateToFairyTaleCreationFragment("low") } // 난이도 선택 : 영유아
+            btnMid.setOnClickListener{ navigateToFairyTaleCreationFragment("mid") } // 난이도 선택 : 초등학교 저학년
+            btnHigh.setOnClickListener{ navigateToFairyTaleCreationFragment("high") } // 난이도 선택 : 초등학교 저학년
         }
     }
-    private fun onLevelSelected(level : String) {
-        vm.selectLevel(level)
-        navigateToFairyTaleCreationFragment()
-    }
-
-    private fun navigateToFairyTaleCreationFragment() {
-        findNavController().navigate(R.id.action_onboardingFragment_to_fairyTaleCreationFragment)
+    private fun navigateToFairyTaleCreationFragment(selectedLevel : String) {
+        val actionToFairyTaleCreation = OnboardingFragmentDirections
+            .actionOnboardingFragmentToFairyTaleCreationFragment(selectedLevel)
+        findNavController().navigate(actionToFairyTaleCreation)
     }
 
 }

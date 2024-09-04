@@ -11,6 +11,11 @@
         android:label="fragment_fairy_tale_creation"
         tools:layout="@layout/fragment_fairy_tale_creation" >
 
+        <argument
+            android:name="level"
+            app:argType="string"
+            app:nullable="false" />
+
         <action
             android:id="@+id/action_fairyTaleCreationFragment_to_introHangmanFragment"
             app:destination="@id/introHangmanFragment" />
@@ -20,7 +25,11 @@
         android:id="@+id/hangmanFragment"
         android:name="com.sangik.iluvbook.hangman.game.ui.HangmanFragment"
         android:label="fragment_hangman"
-        tools:layout="@layout/fragment_hangman" />
+        tools:layout="@layout/fragment_hangman" >
+        <action
+            android:id="@+id/action_hangmanFragment_to_fairyTaleIntroFragment"
+            app:destination="@id/fairyTaleIntroFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sangik.iluvbook.home.ui.HomeFragment"
@@ -39,15 +48,57 @@
         <action
             android:id="@+id/action_onboardingFragment_to_fairyTaleCreationFragment"
             app:destination="@id/fairyTaleCreationFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/introHangmanFragment"
         android:name="com.sangik.iluvbook.hangman.intro.ui.IntroHangmanFragment"
         android:label="fragment_intro_hangman"
         tools:layout="@layout/fragment_intro_hangman" >
+
+        <argument
+            android:name="traits"
+            app:argType="string[]"
+            app:nullable="false"/>
+
+        <argument
+            android:name="characters"
+            app:argType="string[]"
+            app:nullable="false" />
+        <argument
+            android:name="settings"
+            app:argType="string[]"
+            app:nullable="false" />
+        <argument
+            android:name="genre"
+            app:argType="string[]"
+            app:nullable="false" />
+        <argument
+            android:name="level"
+            app:argType="string"
+            app:nullable="false" />
         <action
             android:id="@+id/action_introHangmanFragment_to_hangmanFragment"
             app:destination="@id/hangmanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fairyTaleIntroFragment"
+        android:name="com.sangik.iluvbook.fairytale.intro.ui.FairyTaleIntroFragment"
+        android:label="fragment_fairy_tale_intro"
+        tools:layout="@layout/fragment_fairy_tale_intro">
+
+        <argument
+            android:name="fairyTaleResponse"
+            app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
+            app:nullable="false" />
+
+        <!-- keywords argument 추가 -->
+        <argument
+            android:name="keywords"
+            app:argType="string[]"
+            app:nullable="false" />
+
     </fragment>
 
 
