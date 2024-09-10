@@ -16,4 +16,10 @@
     <string name="hangman_intro_title">두구두구\n어떤 동화책이 만들어질까?</string>
     <string name="hangman_intro_banner_image">hangman intro banner image</string>
     <string name="game_start_button">game start button</string>
+    <string name="translate">translate</string>
+    <string name="volume">volume</string>
+    <string name="button_left">button left</string>
+    <string name="button_right">button right</string>
+    <string name="fairy_tale_detail_last_suggestion_title">동화를 더 즐겨볼까요?</string>
+    <string name="fairy_tale_suggestion_content">단어장도 만들고 퀴즈도 풀어보며\n동화를 색다르게 즐겨봐요 :)</string>
 </resources>
