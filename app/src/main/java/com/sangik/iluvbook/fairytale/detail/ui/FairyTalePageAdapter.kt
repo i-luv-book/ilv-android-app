@@ -19,13 +19,14 @@ class FairyTalePageAdapter(
     override fun createFragment(position: Int): Fragment {
         val pageCount = vm.pages.value?.size ?: 0
 
+        val fairyTaleTitle = vm.fairyTaleTitle.value.toString()
         return if (position < pageCount) {
             // 현재 position에 해당하는 Page 데이터를 가져와 FairyTalePageFragment를 생성
             val pageData = vm.pages.value?.get(position)
-            FairyTalePageFragment.newInstance(pageData)
+            FairyTalePageFragment.newInstance(pageData, fairyTaleTitle)
         } else {
             // 마지막 페이지일 경우 FairyTaleDetailLastPageFragment를 반환
-            FairyTaleDetailLastPageFragment()
+            FairyTaleDetailLastPageFragment.newInstance(fairyTaleTitle)
         }
     }
 
