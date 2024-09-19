@@ -1,6 +1,6 @@
 package com.sangik.iluvbook.fairytale.detail.viewmodel
 
-import android.view.View
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sangik.iluvbook.base.BaseViewModel
@@ -33,9 +33,9 @@ class FairyTalePageViewModel : BaseViewModel() {
         _fairyTaleTitle.value = title
     }
 
-    fun setOriginalText(text: String) {
+    fun setOriginalContent(text: String) {
         originalText = text
-        _pageContent.value = if (_isTranslationButtonActive.value == true) text else originalText
+        _pageContent.value = originalText
     }
 
     // 번역 초기화

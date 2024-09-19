@@ -2,6 +2,7 @@ package com.sangik.iluvbook.fairytale.detail.ui
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.google.mlkit.nl.translate.Translator
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTalePageBinding
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel
 import com.sangik.iluvbook.fairytale.model.dto.Page
-import com.sangik.iluvbook.util.TextTranslator
 import java.util.Locale
 
 class FairyTalePageFragment : Fragment() {
@@ -49,7 +48,7 @@ class FairyTalePageFragment : Fragment() {
     private fun setupUi() {
         arguments?.getParcelable<Page>("pageData")?.let { pageData ->
             Glide.with(this).load(pageData.imgURL).into(binding.pageImage)
-            vm.setOriginalText(pageData.content) // 원본 동화 (영어)
+            vm.setOriginalContent(pageData.content) // 원본 동화 (영어)
         }
 
         arguments?.getString("fairyTaleTitle")?.let { vm.setFairyTaleTitle(it) }
