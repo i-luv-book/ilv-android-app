@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.hangman.game.model
+package com.sangik.iluvbook.hangman.model
 
 data class HangmanResponse(
     val hint: String,
