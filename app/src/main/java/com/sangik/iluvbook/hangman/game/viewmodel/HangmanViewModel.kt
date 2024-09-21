@@ -1,17 +1,14 @@
 package com.sangik.iluvbook.hangman.game.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.sangik.iluvbook.base.BaseViewModel
-import com.sangik.iluvbook.network.service.HangmanService
-import com.sangik.iluvbook.network.RetrofitClient
-import com.sangik.iluvbook.network.repository.HangmanRepository
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 
 class HangmanViewModel : BaseViewModel() {
-    private val hangmanRepository : HangmanRepository
 
     // 사용자가 클릭한 문자 저장
     private var clickedChar = mutableSetOf<Char>()
@@ -32,22 +29,13 @@ class HangmanViewModel : BaseViewModel() {
     val displayedAnswer : LiveData<List<Char?>> get() = _displayedAnswer
 
     // 현재 행맨 레벨
-
-    private val _hangmanLevel = MutableLiveData<Int>()
+    private val _hangmanLevel = MutableLiveData<Int>().apply { value = 0 }
     val hangmanLevel : LiveData<Int> get() = _hangmanLevel
 
     // 정답 맞춘지 여부
-
-    private val _isClear = MutableLiveData<Boolean>()
+    private val _isClear = MutableLiveData<Boolean>().apply { value = false }
     val isClear : LiveData<Boolean> get() = _isClear
-    init {
-        val apiService : HangmanService = RetrofitClient.createService(HangmanService::class.java)
-        hangmanRepository = HangmanRepository(apiService)
-        fetchWord() // 단어 호출
-        clickedChar = mutableSetOf() // 문자 초기화
-        _hangmanLevel.value = 0 // 초기 행맨 레벨
-        _isClear.value = false // 초기 정답 상태
-    }
+
 
     // 사용자가 키보드 선택 시
     fun onKeyClicked(inputChar : Char) {
@@ -68,7 +56,8 @@ class HangmanViewModel : BaseViewModel() {
         val answer = _answer.value ?: return
 
         // 표시된 정답 업데이트
-        val updatedAnswer = _displayedAnswer.value?.toMutableList() ?: MutableList<Char?>(answer.length) { null }
+        val updatedAnswer = _displayedAnswer.value?.toMutableList()
+            ?: MutableList<Char?>(answer.length) { null }
         var isCorrect = false
 
         for (i in answer.indices) {
@@ -91,50 +80,35 @@ class HangmanViewModel : BaseViewModel() {
         _hangmanLevel.value = (_hangmanLevel.value ?: 0) + 1
     }
 
-    // 게임에서 사용할 단어
-    private fun fetchWord() {
-        setLoading(true) // 디자인 정해지면 로딩 처리
-        viewModelScope.launch {
-            try {
-                val hangmanResponse = hangmanRepository.fetchWord()
-                hangmanResponse?.let {
-                    updateHint(it.hint)
-                    updateAnswer(it.word)
-                    _keyboardChars.value = processWord(it.word)
-                }
-            }catch (e : Exception) {
-                Log.d("asdf", e.message.toString())
-            }finally {
-                setLoading(false)
-            }
-        }
-    }
-
-    private fun updateAnswer(answer : String) {
+    // 행맨 관련 데이터를 설정
+    fun setHangmanData(answer: String, hint : String) {
         _answer.value = answer.uppercase()
         _displayedAnswer.value = List(answer.length) { null }
-    }
-
-    private fun updateHint(hint : String) {
         _hint.value = hint
+        _keyboardChars.value = generateKeyboardChars(answer)
     }
-    private fun processWord(answer : String) : List<Char> {
-        val wordLength = answer.length
-        val uniqueChars = answer.toCharArray().distinct() // 중복 제거된 문자
-        val keyboardLength = (wordLength * 3).coerceAtMost(26) // 단어의 3배, 최대 26
 
-        // 결과에 포함될 문자 집합
-        val resultSet = mutableSetOf<Char>()
-        resultSet.addAll(uniqueChars)
+
+    private fun generateKeyboardChars(answer : String) : List<Char> {
+        // 정답 문자열을 대문자로 변환, 중복 문자 제거
+        val answerChars = answer.uppercase().toSet()
+
+        // 필요한 키보드 문자 수 : 단어의 3배, 최대 26
+        val keyboardLength = (answer.length * 3).coerceAtMost(26)
+
+        // 키보드 표시 문자 집합 초기화
+        val resultCharSet = answerChars.toMutableSet()
 
         // 남은 자리 채울 알파벳 (이미 포함된 문자 제거)
-        val availableChars = ('A'..'Z').toMutableList().apply { removeAll(resultSet) }
+        val additionalChars = ('A'..'Z').toMutableList().apply { removeAll(resultCharSet) }
 
-        while (resultSet.size < keyboardLength) {
-            resultSet.add(availableChars.random())
+        // 키보드 문자 집합에 랜덤 문자 추가
+        while (resultCharSet.size < keyboardLength && additionalChars.isNotEmpty()) {
+            val randomChar = additionalChars.random()
+            resultCharSet.add(randomChar)
+            additionalChars.remove(randomChar)
         }
-
-        val resultSetUpperCase = resultSet.map { it.uppercaseChar() }.toMutableSet()
-        return resultSetUpperCase.sorted() // 오름차순 정렬 반환
+        return resultCharSet.toList().sorted() // 오름차순 정렬 반환
     }
+
 }
