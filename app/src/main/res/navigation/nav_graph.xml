@@ -26,6 +26,10 @@
         android:name="com.sangik.iluvbook.hangman.game.ui.HangmanFragment"
         android:label="fragment_hangman"
         tools:layout="@layout/fragment_hangman" >
+        <argument
+            android:name="keywords"
+            app:argType="string[]"
+            app:nullable="false" />
         <action
             android:id="@+id/action_hangmanFragment_to_fairyTaleIntroFragment"
             app:destination="@id/fairyTaleIntroFragment" />

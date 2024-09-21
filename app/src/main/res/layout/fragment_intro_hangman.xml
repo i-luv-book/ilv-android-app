@@ -68,7 +68,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <ImageButton
-            android:id="@+id/start"
+            android:id="@+id/btn_start_game"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_start_game"
