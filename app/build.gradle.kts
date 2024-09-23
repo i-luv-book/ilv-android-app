@@ -54,6 +54,13 @@ android {
         getByName("release") {
             buildConfigField("String", "THUMBNAIL_TEST_IMG_URL", "\"${localProperties["THUMBNAIL_TEST_IMG_URL"]}\"")
         }
+
+        getByName("debug") {
+            buildConfigField("String", "FAIRYTALE_TEST_IMG_URL", "\"${localProperties["FAIRYTALE_TEST_IMG_URL"]}\"")
+        }
+        getByName("release") {
+            buildConfigField("String", "FAIRYTALE_TEST_IMG_URL", "\"${localProperties["FAIRYTALE_TEST_IMG_URL"]}\"")
+        }
     }
 
     compileOptions {
@@ -101,20 +108,26 @@ dependencies {
     val androidxTestVersion = "1.5.0"  // 호환되는 버전으로 변경
     val espressoVersion = "3.5.1" // 호환되는 버전으로 변경
 
-    // Mockito and ByteBuddy for Android Testing
     androidTestImplementation("org.mockito:mockito-android:5.4.0")
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.5") // 호환되는 버전으로 변경
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espressoVersion") // 추가된 부분
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espressoVersion")
     androidTestImplementation("androidx.test:core:$androidxTestVersion")
     androidTestImplementation("androidx.test:runner:$androidxTestVersion")
     androidTestImplementation("androidx.test:rules:$androidxTestVersion")
+
+    implementation("me.relex:circleindicator:2.1.6")
 
     // Fragment testing
     debugImplementation("androidx.fragment:fragment-testing:1.8.2")
 
     // LiveData Testing
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+
+
+    // ml kit 번역
+    implementation("com.google.mlkit:translate:17.0.3")
+
 }
 
