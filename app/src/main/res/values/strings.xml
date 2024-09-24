@@ -24,4 +24,8 @@
     <string name="fairy_tale_suggestion_content">단어장도 만들고 퀴즈도 풀어보며\n동화를 색다르게 즐겨봐요 :)</string>
     <string name="hangman_game_title">Hangman Time!</string>
     <string name="hangman_game_content">멋진 동화책이 만들어지고 있어요\nHangman 게임을 하며 기다려볼까요?</string>
+    <string name="fairytale_loading_title">두구두구\n어 동화책이 만들어질까?</string>
+    <string name="fairytale_loading_body">여러분 알고 계셨나요?\n사과엔 눈이 없어요 하하하</string>
+    <string name="loading_img">loading_img</string>
+    <string name="chevron_back">chevron_back</string>
 </resources>

@@ -117,7 +117,23 @@
 
     <style name="fairytale_last_page_title">
         <item name="fontFamily">@font/pretendard_semibold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <!--    동화 생성 로딩-->
+    <!--    동화 생성 로딩_타이틀-->
+    <style name="fairytale_loading_title">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <!--    동화 생성 로딩 바디-->
+    <style name="fairytale_loading_body">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">#98989E</item>
     </style>
 </resources>

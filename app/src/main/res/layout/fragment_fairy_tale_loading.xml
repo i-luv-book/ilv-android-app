@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fairytale.loading.ui.FairyTaleLoadingFragment">
+
+
+    <data>
+        <variable
+            name="loadingViewModel"
+            type="com.sangik.iluvbook.fairytale.loading.viewmodel.FairyTaleLoadingViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/btn_chevron_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/chevron_back"
+            android:contentDescription="@string/chevron_back" />
+
+        <ImageView
+            android:id="@+id/loading_banner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/fairytale_loading"
+            android:elevation="26dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="78dp"
+            android:layout_marginBottom="268dp"
+            android:contentDescription="@string/loading_img" />
+
+        <TextView
+            android:id="@+id/fairytale_loading_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:text="@string/fairytale_loading_title"
+            android:textAppearance="@style/fairytale_last_page_title"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/loading_banner"
+            app:layout_constraintBottom_toTopOf="@id/fairytale_loading_body"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/fairytale_loading_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fairytale_loading_body"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="118dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fairytale_loading_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
