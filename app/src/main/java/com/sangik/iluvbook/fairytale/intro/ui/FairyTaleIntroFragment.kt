@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.sangik.iluvbook.R
@@ -16,7 +17,7 @@ import com.sangik.iluvbook.fairytale.intro.viewmodel.FairyTaleIntroViewModel
 class FairyTaleIntroFragment : Fragment() {
     private lateinit var vm: FairyTaleIntroViewModel
     private lateinit var binding: FragmentFairyTaleIntroBinding
-
+    private val args : FairyTaleIntroFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,11 +38,10 @@ class FairyTaleIntroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fairyTaleResponseArgs = FairyTaleIntroFragmentArgs.fromBundle(requireArguments())
-        vm.initData(fairyTaleResponseArgs.fairyTaleResponse, fairyTaleResponseArgs.keywords.toList())
+        vm.initData(args.fairyTaleResponse, args.keywords.toList())
 
         // RecyclerView 설정
-        setRecyclerView(fairyTaleResponseArgs.keywords.toList())
+        setRecyclerView(args.keywords.toList())
 
         setGlideImage()
     }

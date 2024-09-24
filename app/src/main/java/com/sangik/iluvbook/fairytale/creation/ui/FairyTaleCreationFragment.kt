@@ -14,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
@@ -21,6 +22,7 @@ import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
 
 class FairyTaleCreationFragment : Fragment() {
+    private val args: FairyTaleCreationFragmentArgs by navArgs()
 
     private lateinit var onboardingViewModel: OnboardingViewModel
     private lateinit var vm: FairyTaleCreationViewModel
@@ -69,13 +71,12 @@ class FairyTaleCreationFragment : Fragment() {
     // 난이도 설정 관련 텍스트 (추후 API 연결시 사용)
     private fun setupObserver() {
         onboardingViewModel.selectedLevel.observe(viewLifecycleOwner) { level ->
-            Log.d("asdf" , level.toString())
             binding.selectedLevel.text = level
         }
     }
 
     // 동화 생성 버튼 상태에 따른 변경
-    private fun initCreateButtonListener() {
+    private fun setCreateButtonStatus() {
         vm.isAllGroupSelected.observe(viewLifecycleOwner) { isEnabled ->
             binding.btnCreate.isClickable = isEnabled
             binding.btnCreate.setBackgroundResource(
@@ -83,6 +84,7 @@ class FairyTaleCreationFragment : Fragment() {
             )
         }
     }
+
 
     // 추가 버튼 클릭시 새로운 chip 추가
     private fun setAddButtonClickListener(
@@ -106,15 +108,33 @@ class FairyTaleCreationFragment : Fragment() {
         initTextChangedListener()
         initAddButtonListener()
         initCancelClickListener()
-        initCreateButtonListener()
+        setCreateButtonStatus()
         initCreateFairyTaleButtonListener()
     }
 
     // 행맨 게임 인트로 이동
     private fun initCreateFairyTaleButtonListener() {
         binding.btnCreate.setOnClickListener {
-            findNavController().navigate(R.id.action_fairyTaleCreationFragment_to_introHangmanFragment)
+            val traits = vm.selectedChipGroup1.value?.map { id -> getChipTextById(binding.chipGroupWho, id) }?: emptyList()
+            val characters = vm.selectedChipGroup2.value?.map { id -> getChipTextById(binding.chipGroupName, id) }?: emptyList()
+            val settings = vm.selectedChipGroup3.value?.map { id -> getChipTextById(binding.chipGroupWhere, id) }?: emptyList()
+            val genre = vm.selectedChipGroup4.value?.map { id -> getChipTextById(binding.chipGroupGenre, id) }?: emptyList()
+
+            val toIntroHangmanAction = FairyTaleCreationFragmentDirections
+                .actionFairyTaleCreationFragmentToIntroHangmanFragment(
+                    traits.toTypedArray(),
+                    characters.toTypedArray(),
+                    settings.toTypedArray(),
+                    genre.toTypedArray(),
+                    args.level)
+            findNavController().navigate(toIntroHangmanAction)
         }
+    }
+
+    private fun getChipTextById(chipGroup: ChipGroup, chipId: Int): String {
+        val selectedChipView = chipGroup.findViewById<CustomChipView>(chipId)
+        val selectedChip = selectedChipView?.getChip()
+        return selectedChip?.text.toString()
     }
 
     // 추가 버튼 클릭 리스너
