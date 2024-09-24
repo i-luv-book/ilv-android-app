@@ -3,10 +3,6 @@ package com.sangik.iluvbook.hangman.game.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sangik.iluvbook.base.BaseViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 
 class HangmanViewModel : BaseViewModel() {
 
@@ -36,18 +32,30 @@ class HangmanViewModel : BaseViewModel() {
     private val _isClear = MutableLiveData<Boolean>().apply { value = false }
     val isClear : LiveData<Boolean> get() = _isClear
 
+    // 정답 여부에 상관 없이 게임 종료 여부
+    private val _isGameEnd = MutableLiveData<Boolean>().apply { value = false }
+    val isGameEnd : LiveData<Boolean> get() = _isGameEnd
 
     // 사용자가 키보드 선택 시
     fun onKeyClicked(inputChar : Char) {
         clickedChar.add(inputChar)
         updateAnswerCard() // 사용자 input에 따른 정답 상태 업데이트
         isGameClear()
+        isGameEnd()
+    }
+
+    // 정답, 오답 여부에 상관 없이 게임 종료 여부
+    private fun isGameEnd() {
+        if (hangmanLevel.value == 6 || isClear.value == true) {
+            _isGameEnd.value = true // 게임 종료 상태 변경
+        }
     }
 
     // 게임 정답 상태인지 확인
     private fun isGameClear(){
         if (displayedAnswer.value?.joinToString("") == answer.value ){
             _isClear.value = true
+            _isGameEnd.value = true
         }
     }
 

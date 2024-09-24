@@ -17,6 +17,10 @@ import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentHangmanBinding
 import com.sangik.iluvbook.hangman.game.viewmodel.HangmanViewModel
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HangmanFragment : Fragment() {
     private lateinit var hangmanViewModel: HangmanViewModel
@@ -61,10 +65,16 @@ class HangmanFragment : Fragment() {
     private fun navigateToFairyTaleDetail() {
         val fairyTaleResponse = introViewModel.fairyTaleResponse.value
         if (fairyTaleResponse != null) {
-            val actionHangman = HangmanFragmentDirections
+            val actionToFairyTaleIntro = HangmanFragmentDirections
                 .actionHangmanFragmentToFairyTaleIntroFragment(fairyTaleResponse, args.keywords)
-            findNavController().navigate(actionHangman)
+            findNavController().navigate(actionToFairyTaleIntro)
         }
+    }
+
+    private fun navigateToFairyTaleLoading() {
+        val actionToLoading = HangmanFragmentDirections
+            .actionHangmanFragmentToFairyTaleLoadingFragment(args.keywords)
+        findNavController().navigate(actionToLoading)
     }
 
     private fun observeIntroViewModel() {
@@ -97,10 +107,19 @@ class HangmanFragment : Fragment() {
             displayedAnswer.observe(viewLifecycleOwner) { displayedAnswer ->
                 updateDisplayedAnswer(displayedAnswer)
             }
-            // 게임 완료 여부
+            // 게임 성공 여부
             isClear.observe(viewLifecycleOwner) { isClear ->
                 if (isClear) {
                     showGameEndUi(isClear)
+                }
+            }
+            // 게임 완료 시 2초 후 FairyTaleLoading으로 이동
+            isGameEnd.observe(viewLifecycleOwner) { isGameEnd ->
+                if (isGameEnd) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(2000)
+                        navigateToFairyTaleLoading()
+                    }
                 }
             }
             // 행맨 단계 변화
