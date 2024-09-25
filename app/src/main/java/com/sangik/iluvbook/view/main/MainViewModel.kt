@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.main.viewmodel
+package com.sangik.iluvbook.view.main
 
 import com.sangik.iluvbook.base.BaseViewModel
 

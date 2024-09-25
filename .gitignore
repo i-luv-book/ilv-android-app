@@ -275,4 +275,3 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
-/app/src/main/res/xml/network_security_config.xml

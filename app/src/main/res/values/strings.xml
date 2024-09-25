@@ -1,34 +1,3 @@
 <resources>
     <string name="app_name">ILuvBook</string>
-    <string name="onboardingTitle">난이도 설정</string>
-    <string name="onboarding_content">선택된 나이에 따라 교과 과정에 맞는\n동화 생성, 퀴즈, 단어장이 만들어져요</string>
-    <string name="fairy_tale_creation_title">동화 만들기</string>
-    <string name="fairytale_creation_question_who">누구/무엇에 관한 이야기면 좋겠나요?</string>
-    <string name="fairytale_creation_question_name">주인공의 이름은 뭔가요?</string>
-    <string name="fairytale_creation_question_where">어디서 일어나는 일인가요?</string>
-    <string name="fairytale_creation_question_world">어떤 세계를 탐험하고 싶나요?</string>
-    <string name="fairytale_creation_question_who_guide">주인공 정하기 (2개)</string>
-    <string name="fairytale_creation_question_name_guide">이름 정하기 (2개)</string>
-    <string name="fairytale_creation_question_where_guide">배경 정하기 (2개)</string>
-    <string name="fairytale_creation_question_genre_guide">장르 정하기 (1개)</string>
-    <string name="create_optional_fairy_tale">선택형 동화 만들기</string>
-    <string name="hangman_intro_not_funny">여러분 알고계셨나요?\n사과엔 눈이 없어요 하하하</string>
-    <string name="hangman_intro_title">두구두구\n어떤 동화책이 만들어질까?</string>
-    <string name="hangman_intro_banner_image">hangman intro banner image</string>
-    <string name="game_start_button">game start button</string>
-    <string name="translate">translate</string>
-    <string name="volume">volume</string>
-    <string name="button_left">button left</string>
-    <string name="button_right">button right</string>
-    <string name="fairy_tale_detail_last_suggestion_title">동화를 더 즐겨볼까요?</string>
-    <string name="fairy_tale_suggestion_content">단어장도 만들고 퀴즈도 풀어보며\n동화를 색다르게 즐겨봐요 :)</string>
-    <string name="hangman_game_title">Hangman Time!</string>
-    <string name="hangman_game_content">멋진 동화책이 만들어지고 있어요\nHangman 게임을 하며 기다려볼까요?</string>
-    <string name="fairytale_loading_title">두구두구\n어떤 동화책이 만들어질까?</string>
-    <string name="fairytale_loading_body">여러분 알고 계셨나요?\n사과엔 눈이 없어요 하하하</string>
-    <string name="fairytale_completed_title">나만의 동화 완성!</string>
-    <string name="fairytale_completed_body">동화책이 만들어졌어요\n이야기를 읽으로 가볼까요?</string>
-    <string name="loading_img">loading_img</string>
-    <string name="chevron_back">chevron_back</string>
-    <string name="completed_icon">completed_icon</string>
 </resources>
