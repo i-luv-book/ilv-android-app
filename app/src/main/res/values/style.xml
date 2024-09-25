@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    온보딩 타이틀-->
+    <style name="OnboardingTitle">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">22sp</item>
+        <item name="color">#1F2021</item>
+    </style>
+
+    <!--    온보딩 타이틀-->
+    <style name="OnboardingContent">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="color">#6F7075</item>
+    </style>
+
+
+<!--    동화 만들기-->
+    <style name="FairyTaleCreationTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <style name="FairyTaleCreationQuestion">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <style name="FairyTaleCreationGuide">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#6F7075</item>
+    </style>
+
+    <!--    행맨 인트로-->
+
+    <style name="HangmanIntroTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <style name="HangmanIntroContent">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#98989E</item>
+    </style>
+
+    <!--    행맨 게임-->
+    <style name="HangmanGameTitle">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <style name="HangmanGameContent">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#98989E</item>
+    </style>
+
+    <style name="HangmanGameHint">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+<!--    키보드-->
+    <style name="HangmanGameKeyboard">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FF8844</item>
+    </style>
+
+<!--    동화 인트로-->
+    <style name="fairytale_intro_title">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+<!--    동화 요약-->
+    <style name="fairytale_intro_summary_keyword">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+<!--    동화 상세-->
+    <style name="fairytale_detail_title">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="fairytale_detail_content">
+        <item name="fontFamily">@font/switcher</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <style name="fairytale_detail_suggestion_title">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <style name="fairytale_detail_suggestion_content">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#5C5D61</item>
+    </style>
+
+
+    <style name="fairytale_last_page_title">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+    <!--    동화 생성 로딩-->
+    <!--    동화 생성 로딩_타이틀-->
+    <style name="fairytale_loading_title">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#3F3F42</item>
+    </style>
+
+    <!--    동화 생성 로딩 바디-->
+    <style name="fairytale_loading_body">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">#98989E</item>
+    </style>
+</resources>
