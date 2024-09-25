@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_hangmanFragment_to_fairyTaleIntroFragment"
             app:destination="@id/fairyTaleIntroFragment" />
+        <action
+            android:id="@+id/action_hangmanFragment_to_fairyTaleLoadingFragment"
+            app:destination="@id/fairyTaleLoadingFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -97,7 +100,7 @@
             app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
             app:nullable="false" />
 
-        <!-- keywords argument 추가 -->
+        <!-- keywords argument -->
         <argument
             android:name="keywords"
             app:argType="string[]"
@@ -122,6 +125,19 @@
         <action
             android:id="@+id/action_fairyTaleDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fairyTaleLoadingFragment"
+        android:name="com.sangik.iluvbook.fairytale.loading.ui.FairyTaleLoadingFragment"
+        android:label="fragment_fairy_tale_loading"
+        tools:layout="@layout/fragment_fairy_tale_loading" >
+        <argument
+            android:name="keywords"
+            app:argType="string[]"
+            app:nullable="false" />
+        <action
+            android:id="@+id/action_fairyTaleLoadingFragment_to_fairyTaleIntroFragment"
+            app:destination="@id/fairyTaleIntroFragment" />
     </fragment>
 
 
