@@ -113,15 +113,18 @@ class HangmanFragment : Fragment() {
                     showGameEndUi(isClear)
                 }
             }
-            // 게임 완료 시 2초 후 FairyTaleLoading으로 이동
+            // 게임 완료, 동화 응답이 오지 않았을 때 2초 후 FairyTaleLoading으로 이동
             isGameEnd.observe(viewLifecycleOwner) { isGameEnd ->
                 if (isGameEnd) {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(2000)
-                        navigateToFairyTaleLoading()
+                    if (introViewModel.fairyTaleResponse.value == null) {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(2000)
+                            navigateToFairyTaleLoading()
+                        }
                     }
                 }
             }
+
             // 행맨 단계 변화
             hangmanLevel.observe(viewLifecycleOwner) { level ->
                 updateHangmanStatus(level)
