@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item_1"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/menu_home"
         android:title="@string/navigation_item_home"
         />
     <item
-        android:id="@+id/item_2"
+        android:id="@+id/vocabularyFragment"
         android:enabled="true"
         android:icon="@drawable/menu_vocabulary"
         android:title="@string/navigation_item_vocabulary"/>
 
     <item
-        android:id="@+id/item_3"
+        android:id="@+id/quizFragment"
         android:enabled="true"
         android:icon="@drawable/menu_quiz"
         android:title="@string/navigation_item_quiz"/>
 
     <item
-        android:id="@+id/item_4"
+        android:id="@+id/myPageFragment"
         android:enabled="true"
         android:icon="@drawable/menu_my"
         android:title="@string/navigation_item_my"/>

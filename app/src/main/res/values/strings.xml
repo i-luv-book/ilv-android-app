@@ -31,8 +31,8 @@
     <string name="loading_img">loading_img</string>
     <string name="chevron_back">chevron_back</string>
     <string name="completed_icon">completed_icon</string>
-    <string name="navigation_item_home">item_home</string>
-    <string name="navigation_item_vocabulary">item_vocabulary</string>
-    <string name="navigation_item_quiz">item_quiz</string>
-    <string name="navigation_item_my">item_my</string>
+    <string name="navigation_item_home">홈</string>
+    <string name="navigation_item_vocabulary">단어장</string>
+    <string name="navigation_item_quiz">퀴즈</string>
+    <string name="navigation_item_my">마이페이지</string>
 </resources>
