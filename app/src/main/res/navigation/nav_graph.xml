@@ -141,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.sangik.iluvbook.myPage.ui.MyPageFragment"
+        android:name="com.sangik.iluvbook.mypage.ui.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
     <fragment

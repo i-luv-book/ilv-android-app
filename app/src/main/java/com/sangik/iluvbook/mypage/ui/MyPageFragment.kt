@@ -1,4 +1,4 @@
-package com.sangik.iluvbook.myPage.ui
+package com.sangik.iluvbook.mypage.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
