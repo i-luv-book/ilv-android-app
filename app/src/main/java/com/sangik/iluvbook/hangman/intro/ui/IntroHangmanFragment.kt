@@ -64,7 +64,8 @@ class IntroHangmanFragment : Fragment() {
             characters = args.characters.toList(),
             settings = args.settings.toList(),
             genre = args.genre.toList(),
-            level = args.level
+            level = args.level,
+            args.isPremium
         )
     }
 }
