@@ -459,7 +459,9 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
                     <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/premium_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:track="@drawable/switch_track"

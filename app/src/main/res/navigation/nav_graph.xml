@@ -64,6 +64,11 @@
         tools:layout="@layout/fragment_intro_hangman" >
 
         <argument
+            android:name="isPremium"
+            app:argType="boolean"
+            app:nullable="false"/>
+
+        <argument
             android:name="traits"
             app:argType="string[]"
             app:nullable="false"/>
