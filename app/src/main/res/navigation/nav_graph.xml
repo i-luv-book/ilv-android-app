@@ -100,11 +100,6 @@
         android:label="fragment_fairy_tale_intro"
         tools:layout="@layout/fragment_fairy_tale_intro">
 
-        <argument
-            android:name="fairyTaleResponse"
-            app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
-            app:nullable="false" />
-
         <!-- keywords argument -->
         <argument
             android:name="keywords"
