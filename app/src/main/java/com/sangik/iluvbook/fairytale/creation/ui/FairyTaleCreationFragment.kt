@@ -20,6 +20,7 @@ import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
 import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
+import com.sangik.iluvbook.fairytale.model.dto.Keywords
 
 class FairyTaleCreationFragment : Fragment() {
     private val args: FairyTaleCreationFragmentArgs by navArgs()
@@ -126,10 +127,7 @@ class FairyTaleCreationFragment : Fragment() {
             val toIntroHangmanAction = FairyTaleCreationFragmentDirections
                 .actionFairyTaleCreationFragmentToIntroHangmanFragment(
                     isPremium,
-                    traits.toTypedArray(),
-                    characters.toTypedArray(),
-                    settings.toTypedArray(),
-                    genre.toTypedArray(),
+                    Keywords(traits, characters, settings, genre),
                     args.level)
             findNavController().navigate(toIntroHangmanAction)
         }

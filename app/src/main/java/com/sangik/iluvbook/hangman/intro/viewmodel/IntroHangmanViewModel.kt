@@ -31,6 +31,12 @@ class IntroHangmanViewModel : BaseViewModel() {
     private val _fairyTaleSelectionResponse = MutableLiveData<FairyTaleSelectionResponse>()
     val fairyTaleSelectionResponse : LiveData<FairyTaleSelectionResponse> get() = _fairyTaleSelectionResponse
     val hangmanResponse: LiveData<HangmanResponse> get() = _hangmanResponse
+    private val _isPremium = MutableLiveData<Boolean>()
+    val isPremium: LiveData<Boolean> get() = _isPremium
+
+    private val _keywords = MutableLiveData<Keywords>()
+    val keywords : LiveData<Keywords> get() = _keywords
+
 
     init {
         val fairyTaleService: FairyTaleService = RetrofitClient.createService(FairyTaleService::class.java)
@@ -94,6 +100,23 @@ class IntroHangmanViewModel : BaseViewModel() {
         } catch (e: Exception) {
             null
         }
+    }
+
+    // 사용자 선택 키워드 선택
+    fun setKeywords(keywords : Keywords) {
+        _keywords.value = keywords
+    }
+
+    // keywords 리스트 반환
+    fun integrateKeywords(): List<String> {
+        return keywords.value?.let { keywords ->
+            keywords.traits + keywords.characters + keywords.settings + keywords.genre
+        } ?: emptyList()
+    }
+
+    // 프리미엄 여부 설정
+    fun setIsPremium(isPremium : Boolean) {
+        _isPremium.value = isPremium
     }
 
 }

@@ -69,22 +69,9 @@
             app:nullable="false"/>
 
         <argument
-            android:name="traits"
-            app:argType="string[]"
-            app:nullable="false"/>
+            android:name="keywords"
+            app:argType="com.sangik.iluvbook.fairytale.model.dto.Keywords"/>
 
-        <argument
-            android:name="characters"
-            app:argType="string[]"
-            app:nullable="false" />
-        <argument
-            android:name="settings"
-            app:argType="string[]"
-            app:nullable="false" />
-        <argument
-            android:name="genre"
-            app:argType="string[]"
-            app:nullable="false" />
         <argument
             android:name="level"
             app:argType="string"

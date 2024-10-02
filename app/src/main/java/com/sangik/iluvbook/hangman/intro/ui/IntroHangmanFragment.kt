@@ -32,38 +32,38 @@ class IntroHangmanFragment : Fragment() {
             inflater, R.layout.fragment_intro_hangman, container, false
         )
 
+        setupKeywords()
+        initIsPremiumStatus()
         generateHangmanAndFairyTale()
         initListener()
 
         return binding.root
     }
 
+    private fun initIsPremiumStatus() {
+        vm.setIsPremium(args.isPremium)
+    }
+
+    // 사용자 선택 keywords 설정
+    private fun setupKeywords() {
+        vm.setKeywords(args.keywords)
+    }
+
     private fun initListener() {
         binding.btnStartGame.setOnClickListener {
-            val allKeywords = integrateKeywords().toTypedArray()
+            val allKeywords = vm.integrateKeywords().toTypedArray()
             val introHangmanAction = IntroHangmanFragmentDirections.actionIntroHangmanFragmentToHangmanFragment(allKeywords)
             findNavController().navigate(introHangmanAction)
         }
     }
 
-    // 사용자 키워드 List로 통합
-    private fun integrateKeywords() : List<String>{
-        val keywords = Keywords(
-            traits = args.traits.toList(),
-            characters = args.characters.toList(),
-            settings = args.settings.toList(),
-            genre = args.genre.toList()
-        )
-
-        return keywords.traits + keywords.characters + keywords.settings + keywords.genre
-    }
 
     private fun generateHangmanAndFairyTale() {
         vm.callHangmanAndFairyTaleApi(
-            traits = args.traits.toList(),
-            characters = args.characters.toList(),
-            settings = args.settings.toList(),
-            genre = args.genre.toList(),
+            traits = args.keywords.traits,
+            characters = args.keywords.characters,
+            settings = args.keywords.settings,
+            genre = args.keywords.genre,
             level = args.level,
             args.isPremium
         )
