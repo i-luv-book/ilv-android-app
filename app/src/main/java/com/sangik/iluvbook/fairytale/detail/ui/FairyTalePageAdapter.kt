@@ -16,7 +16,7 @@ class FairyTalePageAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (val pageData = fairyTaleDetailViewModel.getPageDataAt(position)) {
-            is PageData.RegularPage -> {
+            is PageData.General -> {
                 FairyTalePageFragment.newInstance(
                     fairyTaleTitle = pageData.title,
                     fairyTaleContent = pageData.content,
