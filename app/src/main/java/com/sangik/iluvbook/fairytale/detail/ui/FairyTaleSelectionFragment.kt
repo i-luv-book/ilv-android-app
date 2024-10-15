@@ -60,7 +60,7 @@
             selectionViewModel.fairyTaleSelectionResponseList.observe(viewLifecycleOwner) { response ->
                 response?.let {
                     if (it.isNotEmpty()) {
-                        selectionViewModel.setupNewFairyTale(it.last())
+                        selectionViewModel.setupNewSelectionOption(it.last())
                     }
                 }
             }

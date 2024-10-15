@@ -177,12 +177,12 @@ class FairyTaleDetailFragment : Fragment() {
             }
         }
 
+        // 마지막 동화 호출 response observing
         selectionViewModel.fairyTaleLastResponse.observe(viewLifecycleOwner) { response ->
             response?.let {
                 fairyTaleDetailViewModel.addLastFairyTaleResponse(response)
                 binding.fairyTaleViewpager.adapter?.notifyDataSetChanged()
                 updateIndicators()
-
             }
         }
     }
@@ -202,6 +202,7 @@ class FairyTaleDetailFragment : Fragment() {
         }
     }
 
+    // 로딩 상태 업데이트
     private fun updateLoadingState(isLoading: Boolean) {
         binding.apply {
             fairyTaleLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
@@ -211,6 +212,7 @@ class FairyTaleDetailFragment : Fragment() {
         }
     }
 
+    // 페이지 특성에 따른 상태 관리를 위한 observing
     private fun observeDetailViewModel() {
 
         // 일반 동화 버튼 상태 관리
@@ -235,6 +237,7 @@ class FairyTaleDetailFragment : Fragment() {
 
     }
 
+    // 버튼 상태 업데이트
     private fun updateButtonState() {
         binding.apply {
             when {
