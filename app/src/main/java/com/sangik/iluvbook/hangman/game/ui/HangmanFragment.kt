@@ -85,25 +85,21 @@ class HangmanFragment : Fragment() {
             }
 
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
-                response?.let {
-                    binding.btnMoveFairytale.let {
-                        it.setBackgroundResource(R.drawable.btn_move_fairytale)
-                        it.isClickable = true
-                    }
-                }
+                response?.let { enableMoveFairyTaleButton() }
             }
 
-            fairyTaleSelectionResponse.observe(viewLifecycleOwner) { response ->
-                response?.let {
-                    binding.btnMoveFairytale.let {
-                        it.setBackgroundResource(R.drawable.btn_move_fairytale)
-                        it.isClickable = true
-                    }
-                }
+            fairyTaleSelectionResponse.observe(viewLifecycleOwner) {
+                response -> response?.let { enableMoveFairyTaleButton() }
             }
         }
     }
 
+    private fun enableMoveFairyTaleButton() {
+        binding.btnMoveFairytale.let {
+            it.setBackgroundResource(R.drawable.btn_move_fairytale)
+            it.isClickable = true
+        }
+    }
     // LiveData 관찰
     private fun observeHangmanViewModel() {
         hangmanViewModel.apply {
