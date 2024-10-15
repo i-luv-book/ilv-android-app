@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_fairyTaleIntroFragment_to_fairyTaleDetailFragment"
             app:destination="@id/fairyTaleDetailFragment" />
+        <action
+            android:id="@+id/action_fairyTaleIntroFragment_to_fairyTaleSelectionFragment"
+            app:destination="@id/fairyTaleSelectionFragment" />
 
     </fragment>
 
@@ -105,10 +108,6 @@
         android:label="fragment_fairy_tale_detail"
         tools:layout="@layout/fragment_fairy_tale_detail" >
 
-        <argument
-            android:name= "fairyTaleResponse"
-            app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
-            app:nullable="false" />
         <action
             android:id="@+id/action_fairyTaleDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -141,6 +140,11 @@
         android:name="com.sangik.iluvbook.vocabulary.ui.VocabularyFragment"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
+    <fragment
+        android:id="@+id/fairyTaleSelectionFragment"
+        android:name="com.sangik.iluvbook.fairytale.detail.ui.FairyTaleSelectionFragment"
+        android:label="fragment_fairy_tale_selection"
+        tools:layout="@layout/fragment_fairy_tale_selection" />
 
 
 </navigation>
