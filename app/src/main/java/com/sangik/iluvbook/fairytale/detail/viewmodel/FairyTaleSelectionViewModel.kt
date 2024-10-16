@@ -1,5 +1,6 @@
 package com.sangik.iluvbook.fairytale.detail.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,9 +15,11 @@ import com.sangik.iluvbook.network.repository.FairyTaleLastRepository
 import com.sangik.iluvbook.network.repository.FairyTaleSelectionRepository
 import com.sangik.iluvbook.network.service.FairyTaleLastService
 import com.sangik.iluvbook.network.service.FairyTaleSelectionService
+import com.sangik.iluvbook.util.TextTranslator
 import kotlinx.coroutines.launch
 
 class FairyTaleSelectionViewModel : BaseViewModel() {
+    private lateinit var contentTranslator: TextTranslator
 
     // 로딩 상태를 나타내는 LiveData
     private val _isLoading = MutableLiveData<Boolean>(false)
@@ -63,6 +66,8 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
             FairyTaleLastService::class.java
         )
         fairyTaleLastRepository = FairyTaleLastRepository(fairyTaleLastService)
+
+        initTranslator()
     }
 
     // 옵션 선택 정보 업데이트
@@ -70,10 +75,11 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
         _selectedOptionIndex.value = if (_selectedOptionIndex.value == index) -1 else index
     }
 
-    // 옵션 설정
-    fun setOptions(options : List<FairyTaleOption>) {
-        _options.value = options
+    // 옵션 초기화
+    fun initOptions(options : List<FairyTaleOption>) {
+        _options.value = removeLineBreak(options)
         _selectedOptionIndex.value = -1
+        translateOptionContents()
     }
 
     // 선택형 동화 호출 (옵션 포함)
@@ -108,8 +114,20 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
     // 선택형 동화 옵션 정보 설정
     fun setupNewSelectionOption(response: FairyTaleSelectionResponse) {
         _fairyTaleTitle.value = response.title
-        _options.value = response.options
+        _options.value = removeLineBreak(response.options)
+        translateOptionContents()
     }
+
+    // 줄바꿈 제거
+    private fun removeLineBreak(options: List<FairyTaleOption>): List<FairyTaleOption> {
+        return options.map { option ->
+            FairyTaleOption(
+                optionTitle = option.optionTitle,
+                optionContent = option.optionContent.replace("\n", "") // 줄바꿈 제거
+            )
+        }
+    }
+
 
     // 선택형 동화 호출
     private suspend fun createFairyTaleSelection(
@@ -123,6 +141,37 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
         } catch (e: Exception) {
             null
         }
+    }
+
+    // 번역 초기화
+    private fun initTranslator() {
+        contentTranslator = TextTranslator()
+        contentTranslator.initialize({}, {})
+    }
+
+    // 옵션 내용 변역
+    private fun translateOptionContents() {
+        val originalOptionContentA = options.value?.get(0)?.optionContent.toString()
+        val originalOptionContentB = options.value?.get(1)?.optionContent.toString()
+        val originalOptionContentC = options.value?.get(2)?.optionContent.toString()
+
+        contentTranslator.translate(
+            originalOptionContentA,
+            { translatedText -> _optionATranslated.value = translatedText},
+            { exception -> _optionATranslated.value = ""}
+        )
+
+        contentTranslator.translate(
+            originalOptionContentB,
+            { translatedText -> _optionBTranslated.value = translatedText},
+            { exception -> _optionBTranslated.value = ""}
+        )
+
+        contentTranslator.translate(
+            originalOptionContentC,
+            { translatedText -> _optionCTranslated.value = translatedText},
+            { exception -> _optionCTranslated.value = ""}
+        )
     }
 
     // 마지막 선택형 동화

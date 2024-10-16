@@ -24,7 +24,7 @@
             options = arguments?.getParcelableArrayList(ARG_OPTION) ?: emptyList()
             detailViewModel = ViewModelProvider(requireActivity()).get(FairyTaleDetailViewModel::class.java)
             selectionViewModel = ViewModelProvider(requireActivity()).get(FairyTaleSelectionViewModel::class.java)
-            selectionViewModel.setOptions(options)
+            selectionViewModel.initOptions(options)
         }
 
         override fun onCreateView(
