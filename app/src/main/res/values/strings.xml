@@ -35,4 +35,5 @@
     <string name="navigation_item_vocabulary">단어장</string>
     <string name="navigation_item_quiz">퀴즈</string>
     <string name="navigation_item_my">마이페이지</string>
+    <string name="selection_page_select_fairytale">동화 내용을 선택해보자!</string>
 </resources>

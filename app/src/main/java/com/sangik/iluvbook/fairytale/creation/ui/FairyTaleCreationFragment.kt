@@ -20,6 +20,7 @@ import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
 import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
+import com.sangik.iluvbook.fairytale.model.dto.Keywords
 
 class FairyTaleCreationFragment : Fragment() {
     private val args: FairyTaleCreationFragmentArgs by navArgs()
@@ -115,6 +116,9 @@ class FairyTaleCreationFragment : Fragment() {
     // 행맨 게임 인트로 이동
     private fun initCreateFairyTaleButtonListener() {
         binding.btnCreate.setOnClickListener {
+            // premium switch 상태 확인
+            val isPremium = binding.premiumSwitch.isChecked
+
             val traits = vm.selectedChipGroup1.value?.map { id -> getChipTextById(binding.chipGroupWho, id) }?: emptyList()
             val characters = vm.selectedChipGroup2.value?.map { id -> getChipTextById(binding.chipGroupName, id) }?: emptyList()
             val settings = vm.selectedChipGroup3.value?.map { id -> getChipTextById(binding.chipGroupWhere, id) }?: emptyList()
@@ -122,10 +126,8 @@ class FairyTaleCreationFragment : Fragment() {
 
             val toIntroHangmanAction = FairyTaleCreationFragmentDirections
                 .actionFairyTaleCreationFragmentToIntroHangmanFragment(
-                    traits.toTypedArray(),
-                    characters.toTypedArray(),
-                    settings.toTypedArray(),
-                    genre.toTypedArray(),
+                    isPremium,
+                    Keywords(traits, characters, settings, genre),
                     args.level)
             findNavController().navigate(toIntroHangmanAction)
         }

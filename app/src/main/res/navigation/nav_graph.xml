@@ -64,22 +64,14 @@
         tools:layout="@layout/fragment_intro_hangman" >
 
         <argument
-            android:name="traits"
-            app:argType="string[]"
+            android:name="isPremium"
+            app:argType="boolean"
             app:nullable="false"/>
 
         <argument
-            android:name="characters"
-            app:argType="string[]"
-            app:nullable="false" />
-        <argument
-            android:name="settings"
-            app:argType="string[]"
-            app:nullable="false" />
-        <argument
-            android:name="genre"
-            app:argType="string[]"
-            app:nullable="false" />
+            android:name="keywords"
+            app:argType="com.sangik.iluvbook.fairytale.model.dto.Keywords"/>
+
         <argument
             android:name="level"
             app:argType="string"
@@ -95,11 +87,6 @@
         android:label="fragment_fairy_tale_intro"
         tools:layout="@layout/fragment_fairy_tale_intro">
 
-        <argument
-            android:name="fairyTaleResponse"
-            app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
-            app:nullable="false" />
-
         <!-- keywords argument -->
         <argument
             android:name="keywords"
@@ -109,6 +96,9 @@
         <action
             android:id="@+id/action_fairyTaleIntroFragment_to_fairyTaleDetailFragment"
             app:destination="@id/fairyTaleDetailFragment" />
+        <action
+            android:id="@+id/action_fairyTaleIntroFragment_to_fairyTaleSelectionFragment"
+            app:destination="@id/fairyTaleSelectionFragment" />
 
     </fragment>
 
@@ -118,10 +108,6 @@
         android:label="fragment_fairy_tale_detail"
         tools:layout="@layout/fragment_fairy_tale_detail" >
 
-        <argument
-            android:name= "fairyTaleResponse"
-            app:argType="com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse"
-            app:nullable="false" />
         <action
             android:id="@+id/action_fairyTaleDetailFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -141,7 +127,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.sangik.iluvbook.myPage.ui.MyPageFragment"
+        android:name="com.sangik.iluvbook.mypage.ui.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
     <fragment
@@ -154,6 +140,11 @@
         android:name="com.sangik.iluvbook.vocabulary.ui.VocabularyFragment"
         android:label="fragment_vocabulary"
         tools:layout="@layout/fragment_vocabulary" />
+    <fragment
+        android:id="@+id/fairyTaleSelectionFragment"
+        android:name="com.sangik.iluvbook.fairytale.detail.ui.FairyTaleSelectionFragment"
+        android:label="fragment_fairy_tale_selection"
+        tools:layout="@layout/fragment_fairy_tale_selection" />
 
 
 </navigation>

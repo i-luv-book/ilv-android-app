@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/fairy_tale_viewpager"
             android:layout_width="0dp"
@@ -38,6 +39,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
+
             <com.sangik.iluvbook.fairytale.detail.ui.CustomCircleIndicator
                 android:id="@+id/fairy_tale_indicator"
                 android:layout_width="0dp"
@@ -51,12 +53,27 @@
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
+
+            <ProgressBar
+                android:id="@+id/fairy_tale_loading"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="visible"
+                android:indeterminateTint="@color/ilv_main_color"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
             <ImageButton
                 android:id="@+id/btn_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_left"
                 android:layout_marginEnd="12dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/btn_right"
                 android:contentDescription="@string/button_left" />

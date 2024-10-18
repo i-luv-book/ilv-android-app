@@ -12,13 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTalePageBinding
+import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel
-import com.sangik.iluvbook.fairytale.model.dto.Page
 import java.util.Locale
 
 class FairyTalePageFragment : Fragment() {
     private lateinit var binding : FragmentFairyTalePageBinding
     private lateinit var vm : FairyTalePageViewModel
+    private lateinit var detailViewModel : FairyTaleDetailViewModel
     private var tts: TextToSpeech? = null
 
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) }
@@ -37,7 +38,9 @@ class FairyTalePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vm = ViewModelProvider(this).get(FairyTalePageViewModel::class.java)
+        detailViewModel = ViewModelProvider(requireActivity()).get(FairyTaleDetailViewModel::class.java)
         binding.pageViewModel = vm
+        binding.detailViewModel = detailViewModel
 
         setupUi()
         initObserver()
@@ -46,12 +49,13 @@ class FairyTalePageFragment : Fragment() {
 
     // UI 및 데이터 설정
     private fun setupUi() {
-        arguments?.getParcelable<Page>("pageData")?.let { pageData ->
-            Glide.with(this).load(pageData.imgURL).into(binding.pageImage)
-            vm.setOriginalContent(pageData.content) // 원본 동화 (영어)
-        }
+        val fairyTaleTitle = arguments?.getString("fairyTaleTitle") ?: "Fairytale title"
+        val fairyTaleContent = arguments?.getString("fairyTaleContent") ?: "Fairytale Content"
+        val imgUrl = arguments?.getString("fairyTaleImgUrl")
 
-        arguments?.getString("fairyTaleTitle")?.let { vm.setFairyTaleTitle(it) }
+        vm.setFairyTaleTitle(fairyTaleTitle)
+        vm.setOriginalContent(fairyTaleContent)
+        Glide.with(this).load(imgUrl).into(binding.pageImage)
     }
 
     // ViewModel의 LiveData 옵저버 설정
@@ -108,11 +112,17 @@ class FairyTalePageFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(pageData: Page?, fairyTaleTitle : String): FairyTalePageFragment {
+        fun newInstance(
+            fairyTaleTitle : String,
+            fairyTaleContent: String,
+            imgUrl : String,
+        ): FairyTalePageFragment {
             val fragment = FairyTalePageFragment()
-            val args = Bundle()
-            args.putString("fairyTaleTitle", fairyTaleTitle)
-            args.putParcelable("pageData", pageData)
+            val args = Bundle().apply {
+                putString("fairyTaleTitle", fairyTaleTitle)
+                putString("fairyTaleContent", fairyTaleContent)
+                putString("fairyTaleImgUrl", imgUrl)
+            }
             fragment.arguments = args
             return fragment
         }

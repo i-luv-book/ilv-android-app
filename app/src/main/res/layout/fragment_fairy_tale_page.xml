@@ -5,10 +5,14 @@
     tools:context=".fairytale.detail.ui.FairyTalePageFragment">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="pageViewModel"
             type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel" />
 
+        <variable
+            name="detailViewModel"
+            type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +22,7 @@
 
         <TextView
             android:id="@+id/fairy_tale_page_title"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="@{pageViewModel.fairyTaleTitle}"
             android:gravity="center"
@@ -38,8 +42,73 @@
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/option_card_user_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="262dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="@{detailViewModel.selectedOption != null ? View.VISIBLE : View.GONE}"
+                android:background="@drawable/option_card_user_selected"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:translationZ="5dp"
+                app:layout_constraintBottom_toTopOf="@id/translate_layout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/icon_user_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:optionIcon="@{detailViewModel.selectedOption.optionNumber}"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_a_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@{detailViewModel.selectedOption.optionTitle}"
+                    android:textAppearance="@style/UserSelectedTitle"
+                    app:layout_constraintLeft_toRightOf="@id/icon_user_selected"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/option_content_user_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.5dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAppearance="@style/UserSelectedContent"
+                    android:text="@{detailViewModel.selectedOption.optionContent}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_title"/>
+
+                <TextView
+                    android:id="@+id/option_translated_user_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="@{detailViewModel.selectedOption.optionTranslated}"
+                    android:textAppearance="@style/UserSelectedContent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/option_content_user_selected"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="0dp"
@@ -50,7 +119,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-
 
         <LinearLayout
             android:id="@+id/translate_layout"

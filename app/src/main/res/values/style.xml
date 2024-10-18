@@ -142,4 +142,53 @@
         <item name="fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <!--    동화 선택 옵션 페이지 -->
+    <style name="fairytaleSelectionTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+<!--    동화 선택 안내-->
+    <style name="fairytaleSelectionGuide">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#6A6AFF</item>
+    </style>
+
+<!--    사용자 선택한 옵션 타이틀-->
+    <style name="UserSelectedTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6A6AFF</item>
+    </style>
+
+    <style name="UserSelectedContent">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+<!--    옵션 타이틀-->
+    <style name="fairyTaleOptionTitle">
+        <item name="fontFamily">@font/jalnan</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6A6AFF</item>
+    </style>
+
+    <!-- 옵션 content 원문 -->
+    <style name="fairyTaleOptionContentOriginal">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#1F2021</item>
+    </style>
+
+<!--    옵션 content 번역-->
+    <style name="fairyTaleOptionContentKr">
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#5C5D61</item>
+    </style>
+
 </resources>

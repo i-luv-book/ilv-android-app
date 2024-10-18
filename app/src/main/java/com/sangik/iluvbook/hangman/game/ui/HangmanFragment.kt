@@ -63,14 +63,12 @@ class HangmanFragment : Fragment() {
 
     // 동화 상세로 이동
     private fun navigateToFairyTaleDetail() {
-        val fairyTaleResponse = introViewModel.fairyTaleResponse.value
-        if (fairyTaleResponse != null) {
-            val actionToFairyTaleIntro = HangmanFragmentDirections
-                .actionHangmanFragmentToFairyTaleIntroFragment(fairyTaleResponse, args.keywords)
-            findNavController().navigate(actionToFairyTaleIntro)
-        }
+        val actionFairyTaleIntro = HangmanFragmentDirections
+            .actionHangmanFragmentToFairyTaleIntroFragment(args.keywords)
+        findNavController().navigate(actionFairyTaleIntro)
     }
 
+    // 동화 로딩으로 이동
     private fun navigateToFairyTaleLoading() {
         val actionToLoading = HangmanFragmentDirections
             .actionHangmanFragmentToFairyTaleLoadingFragment(args.keywords)
@@ -87,16 +85,21 @@ class HangmanFragment : Fragment() {
             }
 
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
-                response?.let {
-                    binding.btnMoveFairytale.let {
-                        it.setBackgroundResource(R.drawable.btn_move_fairytale)
-                        it.isClickable = true
-                    }
-                }
+                response?.let { enableMoveFairyTaleButton() }
+            }
+
+            fairyTaleSelectionResponse.observe(viewLifecycleOwner) {
+                response -> response?.let { enableMoveFairyTaleButton() }
             }
         }
     }
 
+    private fun enableMoveFairyTaleButton() {
+        binding.btnMoveFairytale.let {
+            it.setBackgroundResource(R.drawable.btn_move_fairytale)
+            it.isClickable = true
+        }
+    }
     // LiveData 관찰
     private fun observeHangmanViewModel() {
         hangmanViewModel.apply {
