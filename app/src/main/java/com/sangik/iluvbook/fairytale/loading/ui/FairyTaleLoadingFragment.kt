@@ -1,7 +1,6 @@
 package com.sangik.iluvbook.fairytale.loading.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,11 +18,15 @@ import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
 class FairyTaleLoadingFragment : Fragment() {
     private lateinit var binding: FragmentFairyTaleLoadingBinding
-    private lateinit var fairyTaleLoadingViewModel : FairyTaleLoadingViewModel
+    private lateinit var fairyTaleLoadingViewModel: FairyTaleLoadingViewModel
+    private lateinit var introViewModel: IntroHangmanViewModel
     private val args: FairyTaleLoadingFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fairyTaleLoadingViewModel = ViewModelProvider(this).get(FairyTaleLoadingViewModel::class.java)
+
+        introViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -31,7 +34,12 @@ class FairyTaleLoadingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fairy_tale_loading, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_fairy_tale_loading,
+            container,
+            false
+        )
         binding.lifecycleOwner = viewLifecycleOwner
         binding.loadingViewModel = fairyTaleLoadingViewModel
 
@@ -46,16 +54,22 @@ class FairyTaleLoadingFragment : Fragment() {
     }
 
     private fun initListener() {
-        actionToFairyTaleIntroButton()
+        binding.btnReadFairytale.setOnClickListener {
+            handleFairyTaleIntroNavigation()
+        }
     }
 
     // 동화 생성 response observe
     private fun observeIntroViewModel() {
-        val introViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
         introViewModel.apply {
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
                 response?.let {
                     fairyTaleLoadingViewModel.updateLoadingState() // 동화 생성 완료 UI로 업데이트
+                }
+            }
+            fairyTaleSelectionResponse.observe(viewLifecycleOwner) { response ->
+                response?.let {
+                    fairyTaleLoadingViewModel.updateLoadingState()
                 }
             }
         }
@@ -71,15 +85,14 @@ class FairyTaleLoadingFragment : Fragment() {
     }
 
     // 동화 인트로 이동
-    private fun actionToFairyTaleIntroButton() {
-        binding.btnReadFairytale.setOnClickListener {
-            val fairyTaleResponse = ViewModelProvider(requireActivity())
-                .get(IntroHangmanViewModel::class.java).fairyTaleResponse.value
-            if (fairyTaleResponse != null) {
-                val actionLoading = FairyTaleLoadingFragmentDirections
-                    .actionFairyTaleLoadingFragmentToFairyTaleIntroFragment(fairyTaleResponse, args.keywords)
-                findNavController().navigate(actionLoading)
-            }
+    private fun handleFairyTaleIntroNavigation() {
+        val fairyTaleResponse = introViewModel.fairyTaleResponse.value
+        val fairyTaleSelectionResponse = introViewModel.fairyTaleSelectionResponse.value
+
+        if (fairyTaleResponse != null || fairyTaleSelectionResponse != null) {
+            val actionLoading = FairyTaleLoadingFragmentDirections
+                .actionFairyTaleLoadingFragmentToFairyTaleIntroFragment(args.keywords)
+            findNavController().navigate(actionLoading)
         }
     }
 
@@ -92,7 +105,8 @@ class FairyTaleLoadingFragment : Fragment() {
             ConstraintSet.TOP,
             R.id.completed_icon,
             ConstraintSet.BOTTOM,
-            32)
+            32
+        )
 
         // 부드러운 전환
         TransitionManager.beginDelayedTransition(binding.loadingLayout)
