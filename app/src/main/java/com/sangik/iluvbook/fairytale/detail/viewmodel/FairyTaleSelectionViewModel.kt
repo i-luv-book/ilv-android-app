@@ -21,11 +21,6 @@ import kotlinx.coroutines.launch
 class FairyTaleSelectionViewModel : BaseViewModel() {
     private lateinit var contentTranslator: TextTranslator
 
-    // 로딩 상태를 나타내는 LiveData
-    private val _isLoading = MutableLiveData<Boolean>(false)
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
-
     private var fairyTaleSelectionRepository : FairyTaleSelectionRepository
     private var fairyTaleLastRepository : FairyTaleLastRepository
 
@@ -85,7 +80,7 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
     // 선택형 동화 호출 (옵션 포함)
     fun callNewSelectionFairyTale(keywords: Keywords, newContent : String) {
         viewModelScope.launch {
-            _isLoading.value = true
+            setLoading(true)
             val response = createFairyTaleSelection(keywords, newContent)
 
             response?.let { newResponse ->
@@ -94,20 +89,20 @@ class FairyTaleSelectionViewModel : BaseViewModel() {
                 } ?: mutableListOf(newResponse)
             }
 
-            _isLoading.value = false
+            setLoading(false)
         }
     }
 
     // 마지막 선택형 동화 호출호출
     fun callLastSelectionFairyTale(keywords: Keywords, newContent: String) {
         viewModelScope.launch {
-            _isLoading.value = true
+            setLoading(true)
             val response = createLastFairyTaleSelection(keywords, newContent)
 
             response?.let {
                 _fairyTaleLastResponse.value = it
             }
-            _isLoading.value = false
+            setLoading(false)
         }
     }
 
