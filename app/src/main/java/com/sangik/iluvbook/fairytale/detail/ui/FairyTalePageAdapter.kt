@@ -1,5 +1,6 @@
 package com.sangik.iluvbook.fairytale.detail.ui
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
@@ -16,12 +17,12 @@ class FairyTalePageAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (val pageData = fairyTaleDetailViewModel.getPageDataAt(position)) {
+            // 일반 동화
             is PageData.General -> {
                 FairyTalePageFragment.newInstance(
                     fairyTaleTitle = pageData.title,
                     fairyTaleContent = pageData.content,
-                    imgUrl = pageData.imgUrl.orEmpty()
-                )
+                    imgUrl = pageData.imgUrl.orEmpty())
             }
             // 선택형 동화
             is PageData.SelectionPage -> {

@@ -157,6 +157,19 @@
         <item name="android:textColor">#6A6AFF</item>
     </style>
 
+<!--    사용자 선택한 옵션 타이틀-->
+    <style name="UserSelectedTitle">
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#6A6AFF</item>
+    </style>
+
+    <style name="UserSelectedContent">
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 <!--    옵션 타이틀-->
     <style name="fairyTaleOptionTitle">
         <item name="fontFamily">@font/jalnan</item>

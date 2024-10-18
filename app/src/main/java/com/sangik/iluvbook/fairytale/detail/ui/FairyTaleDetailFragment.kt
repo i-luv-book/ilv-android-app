@@ -144,7 +144,7 @@ class FairyTaleDetailFragment : Fragment() {
     // 선택형 동화 호출
     private fun callSelectionFairyTale() {
         val keywords = introViewModel.keywords.value ?: return
-        val currentContent = fairyTaleDetailViewModel.buildCurrentContent()
+        val currentContent = fairyTaleDetailViewModel.createNewContent()
         val currentIndex = fairyTaleDetailViewModel.getCurrentPageIndex()
 
         if (currentIndex == 3) { // 마지막 선택형 동화 호출

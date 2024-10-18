@@ -12,12 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.sangik.iluvbook.R
 import com.sangik.iluvbook.databinding.FragmentFairyTalePageBinding
+import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel
 import java.util.Locale
 
 class FairyTalePageFragment : Fragment() {
     private lateinit var binding : FragmentFairyTalePageBinding
     private lateinit var vm : FairyTalePageViewModel
+    private lateinit var detailViewModel : FairyTaleDetailViewModel
     private var tts: TextToSpeech? = null
 
     override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) }
@@ -36,7 +38,9 @@ class FairyTalePageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         vm = ViewModelProvider(this).get(FairyTalePageViewModel::class.java)
+        detailViewModel = ViewModelProvider(requireActivity()).get(FairyTaleDetailViewModel::class.java)
         binding.pageViewModel = vm
+        binding.detailViewModel = detailViewModel
 
         setupUi()
         initObserver()
@@ -108,7 +112,11 @@ class FairyTalePageFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(fairyTaleTitle : String, fairyTaleContent: String, imgUrl : String): FairyTalePageFragment {
+        fun newInstance(
+            fairyTaleTitle : String,
+            fairyTaleContent: String,
+            imgUrl : String,
+        ): FairyTalePageFragment {
             val fragment = FairyTalePageFragment()
             val args = Bundle().apply {
                 putString("fairyTaleTitle", fairyTaleTitle)

@@ -1,6 +1,7 @@
     package com.sangik.iluvbook.fairytale.detail.ui
 
     import android.os.Bundle
+    import android.util.Log
     import androidx.fragment.app.Fragment
     import android.view.LayoutInflater
     import android.view.View
@@ -12,6 +13,7 @@
     import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
     import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleSelectionViewModel
     import com.sangik.iluvbook.fairytale.model.dto.FairyTaleOption
+    import com.sangik.iluvbook.fairytale.model.dto.OptionUserSelected
 
     class FairyTaleSelectionFragment : Fragment() {
         private lateinit var selectionViewModel : FairyTaleSelectionViewModel
@@ -54,6 +56,7 @@
             // 옵션 카드 상태 변경
             selectionViewModel.selectedOptionIndex.observe(viewLifecycleOwner) { selectedIndex ->
                 updateOptionCardBackgrounds(selectedIndex)
+                setUserSelectedOption(selectedIndex)
             }
 
             // 사용자 선택 후 새 동화 관련 Response Observing
@@ -63,6 +66,28 @@
                         selectionViewModel.setupNewSelectionOption(it.last())
                     }
                 }
+            }
+        }
+
+        private fun setUserSelectedOption(selectedIndex: Int) {
+            if (selectedIndex != -1) {
+                val selectedOption = options[selectedIndex]
+
+                // 번역된 옵션 내용 설정
+                val translatedContent = when (selectedIndex) {
+                    0 -> selectionViewModel.optionATranslated.value ?: ""
+                    1 -> selectionViewModel.optionBTranslated.value ?: ""
+                    2 -> selectionViewModel.optionCTranslated.value ?: ""
+                    else -> ""
+                }
+
+                val optionUserSelected = OptionUserSelected(
+                    optionNumber = selectedIndex,
+                    optionTitle = selectedOption.optionTitle,
+                    optionContent = selectedOption.optionContent,
+                    optionTranslated = translatedContent
+                )
+                detailViewModel.setSelectedOption(optionUserSelected)
             }
         }
 

@@ -9,7 +9,7 @@ import com.sangik.iluvbook.fairytale.model.dto.FairyTaleLastResponse
 import com.sangik.iluvbook.fairytale.model.dto.FairyTaleResponse
 import com.sangik.iluvbook.fairytale.model.dto.PageData
 import com.sangik.iluvbook.fairytale.model.dto.FairyTaleSelectionResponse
-import com.sangik.iluvbook.fairytale.model.dto.Page
+import com.sangik.iluvbook.fairytale.model.dto.OptionUserSelected
 
 class FairyTaleDetailViewModel : BaseViewModel() {
     private val _currentPageIndex = MutableLiveData<Int>()
@@ -43,8 +43,18 @@ class FairyTaleDetailViewModel : BaseViewModel() {
     private val _currentPageType = MutableLiveData<PageData>()
     val currentPageType: LiveData<PageData> get() = _currentPageType
 
+    // 사용자 선택 옵션
+    private val _selectedOption = MutableLiveData<OptionUserSelected?>()
+    val selectedOption : LiveData<OptionUserSelected?> get() = _selectedOption
+
+
     init {
         _pageDataList.value = mutableListOf()
+    }
+
+    // 사용자 이전 선택 옵션 상세 정보 설정
+    fun setSelectedOption(option : OptionUserSelected) {
+        _selectedOption.value = option
     }
 
     // 선택 페이지 여부 업데이트 함수
@@ -76,7 +86,8 @@ class FairyTaleDetailViewModel : BaseViewModel() {
         }
     }
 
-    fun buildCurrentContent(): String {
+    // 새로운 선택형 동화 호출을 위해 이전 옵션, 동화 내용을 합하기
+    fun createNewContent(): String {
         val currentIndex = getCurrentPageIndex()
         val previousContent = StringBuilder()
 
@@ -100,7 +111,7 @@ class FairyTaleDetailViewModel : BaseViewModel() {
     }
 
     // 페이지 타입 업데이트
-    fun updateCurrentPageType(position: Int) {
+    private fun updateCurrentPageType(position: Int) {
         _currentPageType.value = getPageDataAt(position)
     }
 
@@ -110,7 +121,6 @@ class FairyTaleDetailViewModel : BaseViewModel() {
     }
 
     // 현재 페이지 인덱스 업데이트
-    // 페이지 변경 시 호출하는 메소드에서 타입 업데이트
     fun setCurrentPageIndex(index : Int) {
         _currentPageIndex.value = index
         updateCurrentPageType(index)
