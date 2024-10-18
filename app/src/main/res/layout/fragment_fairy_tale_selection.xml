@@ -123,7 +123,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_content_original"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -186,7 +186,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_b_content_original"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -249,7 +249,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_c_content_original"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
