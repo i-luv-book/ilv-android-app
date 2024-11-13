@@ -131,10 +131,10 @@
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" />
     <fragment
-        android:id="@+id/quizFragment"
-        android:name="com.sangik.iluvbook.quiz.ui.QuizFragment"
-        android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" />
+        android:id="@+id/quizMainFragment"
+        android:name="com.sangik.iluvbook.quiz.main.ui.QuizMainFragment"
+        android:label="fragment_quiz_main"
+        tools:layout="@layout/fragment_quiz_main" />
     <fragment
         android:id="@+id/vocabularyFragment"
         android:name="com.sangik.iluvbook.vocabulary.ui.VocabularyFragment"

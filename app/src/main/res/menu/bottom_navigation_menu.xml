@@ -13,7 +13,7 @@
         android:title="@string/navigation_item_vocabulary"/>
 
     <item
-        android:id="@+id/quizFragment"
+        android:id="@+id/quizMainFragment"
         android:enabled="true"
         android:icon="@drawable/menu_quiz"
         android:title="@string/navigation_item_quiz"/>
