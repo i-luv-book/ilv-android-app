@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fairytale.detail.ui.FairyTaleSelectionFragment">
+
+    <data>
+        <variable
+            name="selectionViewModel"
+            type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleSelectionViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/chevron_back"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="13dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/fairy_tale_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{selectionViewModel.fairyTaleTitle}"
+                android:textAppearance="@style/fairytaleSelectionTitle"
+                android:layout_marginTop="18.5dp"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/selection_divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44.5dp"
+                android:layout_marginStart="16.5dp"
+                android:layout_marginEnd="16.5dp"
+                android:background="@drawable/selection_divider"
+                app:layout_constraintTop_toBottomOf="@id/fairy_tale_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <TextView
+                android:id="@+id/fairy_tale_selection_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/selection_page_select_fairytale"
+                android:textAppearance="@style/fairytaleSelectionGuide"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selection_divider"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/option_a_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16.5dp"
+                android:layout_marginEnd="16.5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@drawable/option_card_round"
+                app:layout_constraintTop_toBottomOf="@id/fairy_tale_selection_guide"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/option_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/option_a"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_a_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@{selectionViewModel.options[0].optionTitle}"
+                    android:gravity="center_vertical"
+                    android:textAppearance="@style/fairyTaleOptionTitle"
+                    app:layout_constraintLeft_toRightOf="@id/option_a"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_a_content_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.5dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAppearance="@style/fairyTaleOptionContentOriginal"
+                    android:text="@{selectionViewModel.options[0].optionContent}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_title"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_a_content_translated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="@{selectionViewModel.optionATranslated}"
+                    android:textAppearance="@style/fairyTaleOptionContentKr"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_content_original"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/option_b_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16.5dp"
+                android:layout_marginEnd="16.5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@drawable/option_card_round"
+                app:layout_constraintTop_toBottomOf="@id/option_a_card"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/option_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/option_b"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_b_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@{selectionViewModel.options[1].optionTitle}"
+                    android:gravity="center_vertical"
+                    android:textAppearance="@style/fairyTaleOptionTitle"
+                    app:layout_constraintLeft_toRightOf="@id/option_b"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_b_content_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.5dp"
+                    android:lineSpacingExtra="6dp"
+                android:textAppearance="@style/fairyTaleOptionContentOriginal"
+                    android:text="@{selectionViewModel.options[1].optionContent}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_b_title"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_b_content_kr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAppearance="@style/fairyTaleOptionContentKr"
+                    android:text="@{selectionViewModel.optionBTranslated}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_b_content_original"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/option_c_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16.5dp"
+                android:layout_marginEnd="16.5dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@drawable/option_card_round"
+                app:layout_constraintTop_toBottomOf="@id/option_b_card"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/option_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/option_c"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_c_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@{selectionViewModel.options[2].optionTitle}"
+                    android:gravity="center_vertical"
+                    android:textAppearance="@style/fairyTaleOptionTitle"
+                    app:layout_constraintLeft_toRightOf="@id/option_c"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_c_content_original"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10.5dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAppearance="@style/fairyTaleOptionContentOriginal"
+                    android:text="@{selectionViewModel.options[2].optionContent}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_c_title"/>
+
+                <TextView
+                    android:id="@+id/fairy_tale_option_c_content_kr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingExtra="6dp"
+                    android:textAppearance="@style/fairyTaleOptionContentKr"
+                    android:text="@{selectionViewModel.optionCTranslated}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_c_content_original"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

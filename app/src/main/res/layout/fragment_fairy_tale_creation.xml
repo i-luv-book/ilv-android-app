@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fairytale.creation.ui.FairyTaleCreationFragment">
+
+    <data>
+        <variable
+            name="fairyTaleCreationViewModel"
+            type="com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel"/>
+    </data>
+
+    <ScrollView
+        android:id="@+id/fairy_tale_creation_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chevron_back"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="13dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/creation_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/FairyTaleCreationTitle"
+                    android:text="@string/fairy_tale_creation_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="18.5dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/creation_title"
+                    android:elevation="14.1dp"
+                    app:cardCornerRadius="24dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/frame_who"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:id="@+id/question_who"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginStart="16dp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:text="@string/fairytale_creation_question_who"
+                                android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
+                            <TextView
+                                android:id="@+id/guide_who"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fairytale_creation_question_who_guide"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/question_who"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="4dp"
+                                android:textAppearance="@style/FairyTaleCreationGuide"/>
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chip_group_who"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:singleSelection="false"
+                                app:chipSpacing="8dp"
+                                app:singleLine="false"
+                                app:chipSpacingHorizontal="6dp"
+                                app:chipSpacingVertical="6dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                app:layout_constraintTop_toBottomOf="@id/guide_who"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                />
+
+                            <FrameLayout
+                                android:id="@+id/add_chip_who_frame"
+                                android:layout_width="match_parent"
+                                android:layout_height="43dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginTop="6dp"
+                                android:visibility="gone"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/chip_group_who">
+
+                                <EditText
+                                    android:id="@+id/edit_text_who"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/chip_edit_box"
+                                    android:autofillHints="주인공을 입력해 주세요."
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="4dp"
+                                    android:maxLength="15" />
+
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/btn_add_who"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:clickable="@{fairyTaleCreationViewModel.isWhoInputValid()}"
+                                    android:src="@{fairyTaleCreationViewModel.isWhoInputValid ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                    android:background="@android:color/transparent"
+                                    android:layout_gravity="center_vertical|end"
+                                    />
+                            </FrameLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <View
+                            android:id="@+id/dotted_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="@drawable/dotted_line"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintTop_toBottomOf="@id/frame_who"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"/>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/frame_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dotted_line"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                            <TextView
+                                android:id="@+id/question_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginStart="16dp"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/frame_name"
+                                android:text="@string/fairytale_creation_question_name"
+                                android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
+                            <TextView
+                                android:id="@+id/guide_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fairytale_creation_question_name_guide"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/question_name"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="4dp"
+                                android:textAppearance="@style/FairyTaleCreationGuide"/>
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chip_group_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:singleSelection="false"
+                                app:singleLine="false"
+                                app:chipSpacingHorizontal="6dp"
+                                app:chipSpacingVertical="6dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                app:layout_constraintTop_toBottomOf="@id/guide_name"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                />
+
+                            <FrameLayout
+                                android:id="@+id/add_chip_name_frame"
+                                android:layout_width="match_parent"
+                                android:layout_height="43dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginTop="6dp"
+                                android:visibility="gone"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/chip_group_name">
+
+                                <EditText
+                                    android:id="@+id/edit_text_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/chip_edit_box"
+                                    android:text="@={fairyTaleCreationViewModel.nameInput}"
+                                    android:autofillHints="이름을 입력해 주세요."
+                                    android:paddingStart="16dp"
+                                    android:paddingEnd="4dp"
+                                    android:maxLength="15" />
+
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/btn_add_name"
+                                    android:layout_width="37dp"
+                                    android:layout_height="37dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:clickable="@{fairyTaleCreationViewModel.isNameInputValid()}"
+                                    android:src="@{fairyTaleCreationViewModel.isNameInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                    android:layout_gravity="center_vertical|end"
+                                    />
+                            </FrameLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_where"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="24dp"
+                    android:elevation="14.1dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_view_top">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="24dp">
+
+                        <TextView
+                            android:id="@+id/question_where"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/fairytale_creation_question_where"
+                            android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
+                        <TextView
+                            android:id="@+id/guide_background"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/question_where"
+                            android:text="@string/fairytale_creation_question_where_guide"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="16dp"
+                            android:textAppearance="@style/FairyTaleCreationGuide"/>
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chip_group_where"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="false"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/guide_background"
+                            android:layout_marginStart="16dp"
+                            app:layout_goneMarginEnd="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="12dp"
+                            app:chipSpacing="8dp"
+                            app:singleLine="false"
+                            />
+
+                        <FrameLayout
+                            android:id="@+id/add_chip_where_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="6dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/chip_group_where">
+
+                            <EditText
+                                android:id="@+id/edit_text_where"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/chip_edit_box"
+                                android:autofillHints="배경을 입력해 주세요."
+                                android:paddingStart="16dp"
+                                android:paddingEnd="4dp"
+                                android:maxLength="15" />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/btn_add_where"
+                                android:layout_width="37dp"
+                                android:layout_height="37dp"
+                                android:layout_marginEnd="4dp"
+                                android:clickable="@{fairyTaleCreationViewModel.isWhereInputValid()}"
+                                android:src="@{fairyTaleCreationViewModel.isWhereInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                android:layout_gravity="center_vertical|end"
+                                />
+                        </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="24dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_view_where">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="24dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/question_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginStart="16dp"
+                            android:text="@string/fairytale_creation_question_world"
+                            android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
+                        <TextView
+                            android:id="@+id/guide_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/question_genre"
+                            android:text="@string/fairytale_creation_question_genre_guide"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginStart="16dp"
+                            android:textAppearance="@style/FairyTaleCreationGuide"/>
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chip_group_genre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="false"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/guide_genre"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="12dp"
+                            app:chipSpacing="8dp"
+                            app:singleLine="false"
+                            />
+
+                        <FrameLayout
+                            android:id="@+id/add_chip_genre_frame"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="6dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/chip_group_genre">
+
+                            <EditText
+                                android:id="@+id/edit_text_genre"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/chip_edit_box"
+                                android:text="@{fairyTaleCreationViewModel.genreInput}"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="4dp"
+                                android:maxLength="15"
+                                android:autofillHints="장르를 입력해 주세요." />
+
+                            <androidx.appcompat.widget.AppCompatImageButton
+                                android:id="@+id/btn_add_genre"
+                                android:layout_width="37dp"
+                                android:layout_height="37dp"
+                                android:layout_marginEnd="4dp"
+                                android:clickable="@{fairyTaleCreationViewModel.isGenreInputValid()}"
+                                android:src="@{fairyTaleCreationViewModel.isGenreInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                android:layout_gravity="center_vertical|end"
+                                />
+                        </FrameLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/selected_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/toggle_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_view_genre">
+
+                    <ImageView
+                        android:id="@+id/iv_crown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/crown"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/dd"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/create_optional_fairy_tale"
+                        android:layout_marginStart="4dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/FairyTaleCreationQuestion"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/premium_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:track="@drawable/switch_track"
+                        android:thumb="@drawable/switch_thumb"
+                        />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/premium_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/premium_banner"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:shadowColor="#DA66F638"
+                    android:shadowRadius="100"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toggle_layout"
+                    app:layout_constraintBottom_toTopOf="@id/btn_create"
+                    />
+
+                <ImageButton
+                    android:id="@+id/btn_create"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_create_off"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/premium_banner"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

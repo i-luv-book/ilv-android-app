@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".quiz.main.ui.QuizMainFragment">
+
+    <data>
+        <variable
+            name="quizMainViewModel"
+            type="com.sangik.iluvbook.quiz.main.viewmodel.QuizMainViewModel" />
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/quiz_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/quiz_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_weight="1"
+                    android:text="@string/quiz_main_title"
+                    android:textAppearance="@style/quiz_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/create_quiz_title"
+                    android:textAppearance="@style/profile_card_stat_label"
+                    android:textColor="#98989E"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginEnd="16dp" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="33dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/profile_card_background"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quiz_title">
+
+                    <ImageView
+                        android:id="@+id/user_profile_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="324dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/user_profile_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="26dp"
+                        android:text="@{quizMainViewModel.userProfile.nickname}"
+                        android:textAppearance="@style/profile_card_name"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_profile_img" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="14dp"
+                        android:text="000/0000"
+                        android:textAppearance="@style/profile_card_stat"
+                        app:layout_constraintBottom_toBottomOf="@id/user_profile_name"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/user_profile_name" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/profile_card_stat_background"
+                        android:orientation="horizontal"
+                        android:weightSum="5"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/user_profile_name">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesTypesInfo.grammar)}"
+                                android:textAppearance="@style/profile_card_stat_score" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/category_grammar"
+                                android:textAppearance="@style/profile_card_stat_label" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesTypesInfo.voca)}"
+                                android:textAppearance="@style/profile_card_stat_score" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/category_voca"
+                                android:textAppearance="@style/profile_card_stat_label" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesTypesInfo.reading)}"
+                                android:textAppearance="@style/profile_card_stat_score" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/category_reading"
+                                android:textAppearance="@style/profile_card_stat_label" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesTypesInfo.listening)}"
+                                android:textAppearance="@style/profile_card_stat_score" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/category_listening"
+                                android:textAppearance="@style/profile_card_stat_label" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesTypesInfo.creativity)}"
+                                android:textAppearance="@style/profile_card_stat_score" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/category_creativity"
+                                android:textAppearance="@style/profile_card_stat_label" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/quiz_correct_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/correct_quiz"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/quiz_miss_banner"
+                    app:layout_constraintTop_toBottomOf="@id/profile_layout" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/quiz_miss_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/miss_quiz"
+                    app:layout_constraintLeft_toRightOf="@id/quiz_correct_banner"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_layout" />
+
+                <TextView
+                    android:id="@+id/correct_quiz_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesCountsInfo.correctQuizzes)}"
+                    android:textAppearance="@style/quiz_count_banner"
+                    app:layout_constraintLeft_toLeftOf="@id/quiz_correct_banner"
+                    app:layout_constraintRight_toRightOf="@id/quiz_correct_banner"
+                    app:layout_constraintTop_toTopOf="@id/quiz_correct_banner" />
+
+
+                <TextView
+                    android:id="@+id/correct_miss_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="@{String.valueOf(quizMainViewModel.quizStatsData.solvedQuizzesCountsInfo.wrongQuizzes)}"
+                    android:textAppearance="@style/quiz_count_banner"
+                    app:layout_constraintLeft_toLeftOf="@id/quiz_miss_banner"
+                    app:layout_constraintRight_toRightOf="@id/quiz_miss_banner"
+                    app:layout_constraintTop_toTopOf="@id/quiz_miss_banner" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/quiz_main_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/quiz_main_line"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quiz_miss_banner" />
+
+                <TextView
+                    android:id="@+id/quiz_list_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/quiz_list_title"
+                    android:textAppearance="@style/quiz_list_title"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quiz_main_line" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/quiz_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quiz_list_title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/loading_progress"
+            android:visibility="visible"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/ilv_main_color"
+            />
+
+    </FrameLayout>
+</layout>

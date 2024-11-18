@@ -18,7 +18,7 @@ abstract class BaseActivity<T : ViewDataBinding, VM : BaseViewModel>(
         DataBindingUtil.setContentView(this, layoutResId)
     }
 
-    val viewModel : VM by lazy {
+    protected val viewModel : VM by lazy {
         ViewModelProvider(this).get(viewModelClass.java)
     }
 
