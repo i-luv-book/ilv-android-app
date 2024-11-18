@@ -36,4 +36,12 @@
     <string name="navigation_item_quiz">퀴즈</string>
     <string name="navigation_item_my">마이페이지</string>
     <string name="selection_page_select_fairytale">동화 내용을 선택해보자!</string>
+    <string name="quiz_list_title">학습중인 퀴즈들</string>
+    <string name="category_creativity">창의력</string>
+    <string name="category_listening">듣기</string>
+    <string name="category_reading">독해</string>
+    <string name="category_voca">단어</string>
+    <string name="category_grammar">문법</string>
+    <string name="quiz_main_title">나만의 퀴즈</string>
+    <string name="create_quiz_title">퀴즈 만들기 +</string>
 </resources>
