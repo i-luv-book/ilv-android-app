@@ -1,72 +1,55 @@
 package com.sangik.iluvbook.hangman.intro.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentIntroHangmanBinding
-import com.sangik.iluvbook.fairytale.model.dto.Keywords
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
-class IntroHangmanFragment : Fragment() {
 
-    private lateinit var vm : IntroHangmanViewModel
-    private lateinit var binding : FragmentIntroHangmanBinding
+class IntroHangmanFragment : BaseFragment<FragmentIntroHangmanBinding, IntroHangmanViewModel>(
+    R.layout.fragment_intro_hangman,
+    IntroHangmanViewModel::class
+) {
+
     private val args: IntroHangmanFragmentArgs by navArgs()
+    private lateinit var sharedViewModel: IntroHangmanViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_intro_hangman, container, false
-        )
-
-        setupKeywords()
-        initIsPremiumStatus()
-        generateHangmanAndFairyTale()
-        initListener()
-
-        return binding.root
+    override fun initView() {
+        initializeData()
     }
 
-    private fun initIsPremiumStatus() {
-        vm.setIsPremium(args.isPremium)
+    override fun initListeners() {
+        binding.btnStartGame.setOnClickListener { navigateToHangmanFragment() }
     }
 
-    // 사용자 선택 keywords 설정
-    private fun setupKeywords() {
-        vm.setKeywords(args.keywords)
-    }
+    private fun initializeData() {
+        // Premium 여부 설정
+        sharedViewModel.setIsPremium(args.isPremium)
 
-    private fun initListener() {
-        binding.btnStartGame.setOnClickListener {
-            val allKeywords = vm.integrateKeywords().toTypedArray()
-            val introHangmanAction = IntroHangmanFragmentDirections.actionIntroHangmanFragmentToHangmanFragment(allKeywords)
-            findNavController().navigate(introHangmanAction)
-        }
-    }
+        // Keywords 설정
+        sharedViewModel.setKeywords(args.keywords)
 
-
-    private fun generateHangmanAndFairyTale() {
-        vm.callHangmanAndFairyTaleApi(
+        // 행맨, 동화 API 호출
+        sharedViewModel.callHangmanAndFairyTaleApi(
             traits = args.keywords.traits,
             characters = args.keywords.characters,
             settings = args.keywords.settings,
             genre = args.keywords.genre,
             level = args.level,
-            args.isPremium
+            isPremium = args.isPremium
         )
     }
+    private fun navigateToHangmanFragment() {
+        val allKeywords = sharedViewModel.integrateKeywords().toTypedArray()
+        val action = IntroHangmanFragmentDirections.actionIntroHangmanFragmentToHangmanFragment(allKeywords)
+        findNavController().navigate(action)
+    }
 }
-
