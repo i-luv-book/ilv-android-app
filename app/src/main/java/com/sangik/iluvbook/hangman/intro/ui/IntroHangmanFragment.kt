@@ -1,6 +1,7 @@
 package com.sangik.iluvbook.hangman.intro.ui
 
 import android.os.Bundle
+import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -11,7 +12,8 @@ import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
 class IntroHangmanFragment : BaseFragment<FragmentIntroHangmanBinding, IntroHangmanViewModel>(
     R.layout.fragment_intro_hangman,
-    IntroHangmanViewModel::class
+    IntroHangmanViewModel::class,
+    BR.viewModel
 ) {
 
     private val args: IntroHangmanFragmentArgs by navArgs()
@@ -34,7 +36,7 @@ class IntroHangmanFragment : BaseFragment<FragmentIntroHangmanBinding, IntroHang
         // Premium 여부 설정
         sharedViewModel.setIsPremium(args.isPremium)
 
-        // Keywords 설정
+        // keywords 설정
         sharedViewModel.setKeywords(args.keywords)
 
         // 행맨, 동화 API 호출
