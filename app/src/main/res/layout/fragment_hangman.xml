@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="hangmanViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.hangman.game.viewmodel.HangmanViewModel" />
     </data>
 
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|start"
                     android:layout_marginStart="70dp"
-                    android:text="@{hangmanViewModel.hint}"
+                    android:text="@{viewModel.hint}"
                     android:textAppearance="@style/HangmanGameHint" />
             </androidx.cardview.widget.CardView>
 
