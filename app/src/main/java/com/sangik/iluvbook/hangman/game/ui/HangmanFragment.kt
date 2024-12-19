@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +22,6 @@ import kotlinx.coroutines.launch
 class HangmanFragment : BaseFragment<FragmentHangmanBinding, HangmanViewModel> (
     R.layout.fragment_hangman,
     HangmanViewModel::class,
-    BR.viewModel
 ) {
     private lateinit var sharedIntroViewModel: IntroHangmanViewModel
     private val args: HangmanFragmentArgs by navArgs()

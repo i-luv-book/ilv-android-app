@@ -13,7 +13,6 @@ import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 class IntroHangmanFragment : BaseFragment<FragmentIntroHangmanBinding, IntroHangmanViewModel>(
     R.layout.fragment_intro_hangman,
     IntroHangmanViewModel::class,
-    BR.viewModel
 ) {
 
     private val args: IntroHangmanFragmentArgs by navArgs()
