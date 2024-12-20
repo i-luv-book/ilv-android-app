@@ -11,40 +11,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentFairyTalePageBinding
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel
 import java.util.Locale
 
-class FairyTalePageFragment : Fragment() {
-    private lateinit var binding : FragmentFairyTalePageBinding
-    private lateinit var vm : FairyTalePageViewModel
+class FairyTalePageFragment : BaseFragment<FragmentFairyTalePageBinding, FairyTalePageViewModel>(
+    R.layout.fragment_fairy_tale_page,
+    FairyTalePageViewModel::class
+) {
     private lateinit var detailViewModel : FairyTaleDetailViewModel
     private var tts: TextToSpeech? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fairy_tale_page, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        vm = ViewModelProvider(this).get(FairyTalePageViewModel::class.java)
+    override fun initView() {
         detailViewModel = ViewModelProvider(requireActivity()).get(FairyTaleDetailViewModel::class.java)
-        binding.pageViewModel = vm
         binding.detailViewModel = detailViewModel
 
         setupUi()
-        initObserver()
-        vm.initTranslator()
+        viewModel.initTranslator()
     }
 
     // UI 및 데이터 설정
@@ -53,23 +38,23 @@ class FairyTalePageFragment : Fragment() {
         val fairyTaleContent = arguments?.getString("fairyTaleContent") ?: "Fairytale Content"
         val imgUrl = arguments?.getString("fairyTaleImgUrl")
 
-        vm.setFairyTaleTitle(fairyTaleTitle)
-        vm.setOriginalContent(fairyTaleContent)
+        viewModel.setFairyTaleTitle(fairyTaleTitle)
+        viewModel.setOriginalContent(fairyTaleContent)
         Glide.with(this).load(imgUrl).into(binding.pageImage)
     }
 
     // ViewModel의 LiveData 옵저버 설정
-    private fun initObserver() {
+    override fun initObserver() {
         // TTS 버튼 활성화 관리
-        vm.isTTSButtonActive.observe(viewLifecycleOwner) { isActive ->
+        viewModel.isTTSButtonActive.observe(viewLifecycleOwner) { isActive ->
             updateButtonState(binding.btnTts, isActive, R.drawable.btn_tts_active, R.drawable.btn_tts)
             handleTTS(isActive)
         }
 
         // 번역 버튼 활성화 관리
-        vm.isTranslationButtonActive.observe(viewLifecycleOwner) { isActive ->
+        viewModel.isTranslationButtonActive.observe(viewLifecycleOwner) { isActive ->
             updateButtonState(binding.btnTranslate, isActive, R.drawable.btn_translation_active, R.drawable.btn_translation)
-            if (isActive) vm.translateFairyTale() else vm.setOriginalFairyTale()
+            if (isActive) viewModel.translateFairyTale() else viewModel.setOriginalFairyTale()
         }
     }
 
@@ -83,7 +68,7 @@ class FairyTalePageFragment : Fragment() {
         tts = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 // 번역 버튼 상태에 따라 언어 설정
-                val language = if (vm.isTranslationButtonActive.value == true) Locale.KOREA else Locale.ENGLISH
+                val language = if (viewModel.isTranslationButtonActive.value == true) Locale.KOREA else Locale.ENGLISH
                 tts?.language = language
                 tts?.speak(binding.pageContent.text, TextToSpeech.QUEUE_FLUSH, null, null)
             }
@@ -102,7 +87,7 @@ class FairyTalePageFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        vm.deactivateAllStates() // ViewPager 스와이프 화면 이동 시 상태 비활성화
+        viewModel.deactivateAllStates() // ViewPager 스와이프 화면 이동 시 상태 비활성화
     }
 
     override fun onDestroy() {
