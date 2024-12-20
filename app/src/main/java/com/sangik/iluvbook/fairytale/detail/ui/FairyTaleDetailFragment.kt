@@ -1,55 +1,55 @@
 package com.sangik.iluvbook.fairytale.detail.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentFairyTaleDetailBinding
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
 import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleSelectionViewModel
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
-class FairyTaleDetailFragment : Fragment() {
-    private lateinit var fairyTaleDetailViewModel: FairyTaleDetailViewModel
-    private lateinit var binding: FragmentFairyTaleDetailBinding
+class FairyTaleDetailFragment :
+    BaseFragment<FragmentFairyTaleDetailBinding, FairyTaleDetailViewModel>(
+        R.layout.fragment_fairy_tale_detail,
+        FairyTaleDetailViewModel::class
+    ) {
     private lateinit var introViewModel: IntroHangmanViewModel
-    private lateinit var selectionViewModel : FairyTaleSelectionViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fairyTaleDetailViewModel = ViewModelProvider(this).get(FairyTaleDetailViewModel::class.java)
+    private lateinit var selectionViewModel: FairyTaleSelectionViewModel
+
+    override fun initView() {
+        // Activity 범위 ViewModel
         introViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
         selectionViewModel = ViewModelProvider(requireActivity()).get(FairyTaleSelectionViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fairy_tale_detail, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
+    override fun initListeners() {
+        binding.btnLeft.setOnClickListener {
+            viewModel.swipeLeft(binding.fairyTaleViewpager)
+        }
+        binding.btnRight.setOnClickListener {
+            when {
+                // 마지막 페이지인 경우
+                viewModel.isLastPage.value == true -> {
+                    navigateToHomeFragment()
+                }
+                // 옵션 선택 페이지인 경우
+                viewModel.isSelectionPage.value == true -> {
+                    callSelectionFairyTale()
+                    // 옵션 선택 후 비활성화 상태 설정
+                    disableSelectionButton()
+                }
+                else -> {
+                    viewModel.swipeRight(binding.fairyTaleViewpager)
+                }
+            }
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.fairyTaleDetailViewModel = fairyTaleDetailViewModel
-
-        setupViewPager()
-        initListener()
-        initObservers()
-
-        // CustomCircleIndicator와 ViewModel 연동
-        binding.fairyTaleIndicator.bindViewModel(fairyTaleDetailViewModel)
-    }
-
-    private fun initObservers() {
+    override fun initObserver() {
         observeIntroViewModel()
         observeDetailViewModel()
         observeSelectionViewModel()
@@ -60,79 +60,60 @@ class FairyTaleDetailFragment : Fragment() {
         introViewModel.apply {
             // 일반형 동화 응답 관찰
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
-                fairyTaleDetailViewModel.addFairyTaleResponse(response)
+                viewModel.addFairyTaleResponse(response)
                 updateIndicator() // 인디케이터 상태 업데이트
 
                 // 일반 동화가 로드될 때 좌우 버튼 상태
-                fairyTaleDetailViewModel.updateSwipeButtonState(fairyTaleDetailViewModel.getCurrentPageIndex())
+                viewModel.updateSwipeButtonState(viewModel.getCurrentPageIndex())
             }
 
             // 선택형 동화 응답 관찰
             fairyTaleSelectionResponse.observe(viewLifecycleOwner) { response ->
-                fairyTaleDetailViewModel.addFairyTaleSelectionResponse(response)
+                viewModel.addFairyTaleSelectionResponse(response)
                 updateIndicator()
             }
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager()
+
+        // CustomCircleIndicator와 ViewModel 연동
+        binding.fairyTaleIndicator.bindViewModel(viewModel)
+    }
+
     private fun setupViewPager() {
         // adapter 연결
-        val fairytaleAdapter = FairyTalePageAdapter(this, fairyTaleDetailViewModel)
+        val fairytaleAdapter = FairyTalePageAdapter(this, viewModel)
         binding.fairyTaleViewpager.adapter = fairytaleAdapter
 
         // 초기 페이지 설정
         binding.fairyTaleViewpager.setCurrentItem(0, false)
 
         // 초기 상태 업데이트
-        fairyTaleDetailViewModel.updateSwipeButtonState(0)
+        viewModel.updateSwipeButtonState(0)
 
         // viewpager, indicator 연동
         binding.fairyTaleIndicator.setViewPager(binding.fairyTaleViewpager)
 
 
         // 페이지 변화에 따른 상태 업데이트
-        binding.fairyTaleViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.fairyTaleViewpager.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
                 // ViewModel의 현재 페이지 인덱스를 업데이트
-                fairyTaleDetailViewModel.setCurrentPageIndex(position)
+                viewModel.setCurrentPageIndex(position)
 
                 // 페이지 이동 버튼 상태 업데이트
-                fairyTaleDetailViewModel.updateSwipeButtonState(position)
+                viewModel.updateSwipeButtonState(position)
 
                 // CustomCircleIndicator 인디케이터 업데이트
-                binding.fairyTaleIndicator.updateIndicatorState(fairyTaleDetailViewModel, position)
+                binding.fairyTaleIndicator.updateIndicatorState(viewModel, position)
             }
         })
-    }
-
-    private fun initListener() {
-        binding.apply {
-            btnLeft.setOnClickListener {
-                fairyTaleDetailViewModel?.swipeLeft(fairyTaleViewpager)
-            }
-            btnRight.setOnClickListener {
-                fairyTaleDetailViewModel?.let { viewModel ->
-                    when {
-                        // 마지막 페이지인 경우
-                        viewModel.isLastPage.value == true -> {
-                            navigateToHomeFragment()
-                        }
-                        // 옵션 선택 페이지인 경우
-                        viewModel.isSelectionPage.value == true -> {
-                            callSelectionFairyTale()
-                            // 옵션 선택 후 비활성화 상태 설정
-                            disableSelectionButton()
-
-                        }
-                        else -> {
-                            fairyTaleDetailViewModel?.swipeRight(fairyTaleViewpager)
-                        }
-                    }
-                }
-            }
-        }
     }
 
     // 옵션 선택 후 비활성화 상태 설정
@@ -144,13 +125,12 @@ class FairyTaleDetailFragment : Fragment() {
     // 선택형 동화 호출
     private fun callSelectionFairyTale() {
         val keywords = introViewModel.keywords.value ?: return
-        val currentContent = fairyTaleDetailViewModel.createNewContent()
-        val currentIndex = fairyTaleDetailViewModel.getCurrentPageIndex()
+        val currentContent = viewModel.createNewContent()
+        val currentIndex = viewModel.getCurrentPageIndex()
 
         if (currentIndex == 3) { // 마지막 선택형 동화 호출
             selectionViewModel.callLastSelectionFairyTale(keywords, currentContent)
-        }
-        else { // 선택형 동화 호출
+        } else { // 선택형 동화 호출
             selectionViewModel.callNewSelectionFairyTale(keywords, currentContent)
         }
     }
@@ -169,18 +149,18 @@ class FairyTaleDetailFragment : Fragment() {
         // 동화 List
         selectionViewModel.fairyTaleSelectionResponseList.observe(viewLifecycleOwner) { responseList ->
             responseList?.lastOrNull()?.let { response ->
-                fairyTaleDetailViewModel.addFairyTaleSelectionResponse(response)
+                viewModel.addFairyTaleSelectionResponse(response)
                 binding.fairyTaleViewpager.adapter?.notifyDataSetChanged()
                 updateIndicators()
 
-                fairyTaleDetailViewModel.updateSwipeButtonState(fairyTaleDetailViewModel.getCurrentPageIndex())
+                viewModel.updateSwipeButtonState(viewModel.getCurrentPageIndex())
             }
         }
 
         // 마지막 동화 호출 response observing
         selectionViewModel.fairyTaleLastResponse.observe(viewLifecycleOwner) { response ->
             response?.let {
-                fairyTaleDetailViewModel.addLastFairyTaleResponse(response)
+                viewModel.addLastFairyTaleResponse(response)
                 binding.fairyTaleViewpager.adapter?.notifyDataSetChanged()
                 updateIndicators()
             }
@@ -189,9 +169,9 @@ class FairyTaleDetailFragment : Fragment() {
 
     // Indicator 상태 업데이트
     private fun updateIndicators() {
-        val indicatorCount = fairyTaleDetailViewModel.getTotalPageCount()
-        binding.fairyTaleIndicator.createIndicators(indicatorCount, fairyTaleDetailViewModel.getCurrentPageIndex())
-        binding.fairyTaleIndicator.updateIndicatorState(fairyTaleDetailViewModel, fairyTaleDetailViewModel.getCurrentPageIndex())
+        val indicatorCount = viewModel.getTotalPageCount()
+        binding.fairyTaleIndicator.createIndicators(indicatorCount, viewModel.getCurrentPageIndex())
+        binding.fairyTaleIndicator.updateIndicatorState(viewModel, viewModel.getCurrentPageIndex())
     }
 
     // 옵션 선택 버튼 상태 업데이트
@@ -216,22 +196,22 @@ class FairyTaleDetailFragment : Fragment() {
     private fun observeDetailViewModel() {
 
         // 일반 동화 버튼 상태 관리
-        fairyTaleDetailViewModel.isGeneralPage.observe(viewLifecycleOwner) {
+        viewModel.isGeneralPage.observe(viewLifecycleOwner) {
             updateButtonState()
         }
 
         // 선택형 동화 버튼 상태 관리
-        fairyTaleDetailViewModel.isSelectionPage.observe(viewLifecycleOwner) {
+        viewModel.isSelectionPage.observe(viewLifecycleOwner) {
             updateButtonState()
         }
 
         // 왼쪽 버튼 상태 관리
-        fairyTaleDetailViewModel.isLeftButtonVisible.observe(viewLifecycleOwner) {
+        viewModel.isLeftButtonVisible.observe(viewLifecycleOwner) {
             updateButtonState()
         }
 
         // 마지막 페이지 오른쪽 버튼 상태 관리
-        fairyTaleDetailViewModel.isLastPage.observe(viewLifecycleOwner) {
+        viewModel.isLastPage.observe(viewLifecycleOwner) {
             updateButtonState()
         }
 
@@ -239,26 +219,27 @@ class FairyTaleDetailFragment : Fragment() {
 
     // 버튼 상태 업데이트
     private fun updateButtonState() {
-        binding.apply {
-            when {
-                // 마지막 페이지인 경우
-                fairyTaleDetailViewModel?.isLastPage?.value == true -> {
-                    rightButtonToExitDrawable()
-                }
-                fairyTaleDetailViewModel?.isSelectionPage?.value == true -> {
-                    // 옵션 선택 비활성화 버튼으로 바꾸기
-                    rightButtonToSelectInactiveDrawable()
-                    hideLeftButton()
-                }
-                else -> {
-                    setBasicRightButtonDrawable()
-                }
+        when {
+            // 마지막 페이지인 경우
+            viewModel.isLastPage.value == true -> {
+                rightButtonToExitDrawable()
             }
 
-            // 왼쪽 버튼 상태는 첫 페이지인지 여부로 결정
-            btnLeft.visibility = if (fairyTaleDetailViewModel?.isLeftButtonVisible?.value == true) View.VISIBLE else View.INVISIBLE
-            btnLeft.isClickable = fairyTaleDetailViewModel?.isLeftButtonVisible?.value == true
+            viewModel.isSelectionPage.value == true -> {
+                // 옵션 선택 비활성화 버튼으로 바꾸기
+                rightButtonToSelectInactiveDrawable()
+                hideLeftButton()
+            }
+
+            else -> {
+                setBasicRightButtonDrawable()
+            }
         }
+
+        // 왼쪽 버튼 상태는 첫 페이지인지 여부로 결정
+        binding.btnLeft.visibility =
+            if (viewModel.isLeftButtonVisible.value == true) View.VISIBLE else View.INVISIBLE
+        binding.btnLeft.isClickable = viewModel.isLeftButtonVisible.value == true
     }
 
     // 옵션 선택 버튼 (비활성화)로 변경
@@ -290,8 +271,8 @@ class FairyTaleDetailFragment : Fragment() {
 
     // Indicator 상태 업데이트
     private fun updateIndicator() {
-        val indicatorCount = fairyTaleDetailViewModel.getTotalPageCount()
-        binding.fairyTaleIndicator.createIndicators(indicatorCount, fairyTaleDetailViewModel.getCurrentPageIndex())
+        val indicatorCount = viewModel.getTotalPageCount()
+        binding.fairyTaleIndicator.createIndicators(indicatorCount, viewModel.getCurrentPageIndex())
     }
 
     // 메인 화면으로 이동

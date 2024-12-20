@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="fairyTaleDetailViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel" />
     </data>
 
@@ -14,7 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/fairy_tale_viewpager"
