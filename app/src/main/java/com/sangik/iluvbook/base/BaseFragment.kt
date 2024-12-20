@@ -2,7 +2,6 @@ package com.sangik.iluvbook.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.databinding.library.baseAdapters.BR
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -11,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sangik.iluvbook.BR
 import kotlin.reflect.KClass
 
 abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel>(
