@@ -40,7 +40,7 @@ class HangmanFragment : BaseFragment<FragmentHangmanBinding, HangmanViewModel> (
         observeHangmanViewModel()
     }
 
-    override fun initListeners() {
+    override fun initListener() {
         binding.btnMoveFairytale.setOnClickListener {
             navigateToFairyTaleDetail()
         }

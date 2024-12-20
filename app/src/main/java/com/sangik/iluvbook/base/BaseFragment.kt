@@ -33,11 +33,11 @@ abstract class BaseFragment<T : ViewDataBinding, VM : ViewModel>(
 
         initView()
         initObserver()
-        initListeners()
+        initListener()
         return binding.root
     }
 
     open fun initView() {}
     open fun initObserver() {}
-    open fun initListeners() {}
+    open fun initListener() {}
 }

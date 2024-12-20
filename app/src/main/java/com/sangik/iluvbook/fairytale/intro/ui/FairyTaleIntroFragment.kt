@@ -33,7 +33,7 @@ class FairyTaleIntroFragment : BaseFragment<FragmentFairyTaleIntroBinding, Fairy
         observeIntroHangmanViewModel()
     }
 
-    override fun initListeners() {
+    override fun initListener() {
         actionToFairyTaleDetail()
     }
 

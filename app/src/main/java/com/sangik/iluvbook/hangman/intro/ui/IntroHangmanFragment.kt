@@ -27,7 +27,7 @@ class IntroHangmanFragment : BaseFragment<FragmentIntroHangmanBinding, IntroHang
         initializeData()
     }
 
-    override fun initListeners() {
+    override fun initListener() {
         binding.btnStartGame.setOnClickListener { navigateToHangmanFragment() }
     }
 

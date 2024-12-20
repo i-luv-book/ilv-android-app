@@ -26,7 +26,7 @@ class FairyTaleDetailFragment :
         selectionViewModel = ViewModelProvider(requireActivity()).get(FairyTaleSelectionViewModel::class.java)
     }
 
-    override fun initListeners() {
+    override fun initListener() {
         binding.btnLeft.setOnClickListener {
             viewModel.swipeLeft(binding.fairyTaleViewpager)
         }

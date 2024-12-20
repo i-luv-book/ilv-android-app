@@ -23,7 +23,7 @@
             viewModel.initOptions(options)
         }
 
-        override fun initListeners() {
+        override fun initListener() {
             binding.optionACard.setOnClickListener {
                 viewModel.toggleOptionSelection(0)
             }
