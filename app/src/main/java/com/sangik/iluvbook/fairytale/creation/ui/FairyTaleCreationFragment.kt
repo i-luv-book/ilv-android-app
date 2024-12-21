@@ -1,56 +1,46 @@
 package com.sangik.iluvbook.fairytale.creation.ui
 
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.ChipGroup
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentFairyTaleCreationBinding
 import com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel
 import com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel
 import com.sangik.iluvbook.fairytale.model.dto.Keywords
 
-class FairyTaleCreationFragment : Fragment() {
+class FairyTaleCreationFragment : BaseFragment<FragmentFairyTaleCreationBinding, FairyTaleCreationViewModel>(
+    R.layout.fragment_fairy_tale_creation,
+    FairyTaleCreationViewModel::class
+) {
     private val args: FairyTaleCreationFragmentArgs by navArgs()
 
     private lateinit var onboardingViewModel: OnboardingViewModel
-    private lateinit var vm: FairyTaleCreationViewModel
-    private lateinit var binding : FragmentFairyTaleCreationBinding
-    override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // OnboardingActivity와 공유하는 ViewModel
+    override fun initView() {
         onboardingViewModel = ViewModelProvider(requireActivity()).get(OnboardingViewModel::class.java)
-
-        vm = ViewModelProvider(this).get(FairyTaleCreationViewModel::class.java)
-
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_fairy_tale_creation, container, false
-        )
-
-        binding.lifecycleOwner = viewLifecycleOwner // Live Data 사용을 위한 생명주기 소유자 설정
-        binding.fairyTaleCreationViewModel = vm // 레이아웃의 ViewModel 속성에 현재 ViewModel을 할당
-
         initChipGroup() // chip Group 초기화
-        initListener() // 리스너 초기화
-        setupObserver() // Observer 설정 (난이도 설정 관련 텍스트)
+    }
 
-        return binding.root
+    override fun initObserver() {
+        onboardingViewModel.selectedLevel.observe(viewLifecycleOwner) { level ->
+            binding.selectedLevel.text = level
+        }
+
+        // 동화 생성 버튼 상태에 따른 변경
+        viewModel.isAllGroupSelected.observe(viewLifecycleOwner) { isEnabled ->
+            binding.btnCreate.isClickable = isEnabled
+            binding.btnCreate.setBackgroundResource(
+                if (isEnabled) R.drawable.btn_create_on else R.drawable.btn_create_off
+            )
+        }
     }
 
     // Edit Text 외 빈 공간 클릭 시 입력 취소
@@ -69,23 +59,14 @@ class FairyTaleCreationFragment : Fragment() {
         setupChipGroup(binding.chipGroupGenre, arrayOf("\uD83C\uDFD5 모험", "\uD83E\uDD84 판타지", "\uD83E\uDDB8\u200D♂\uFE0F 액션", "\uD83D\uDC80 호러", "\uD83E\uDDD9\u200D♂\uFE0F 마법", "\uD83C\uDFDB\uFE0F 과거"), 4)
     }
 
-    // 난이도 설정 관련 텍스트 (추후 API 연결시 사용)
-    private fun setupObserver() {
-        onboardingViewModel.selectedLevel.observe(viewLifecycleOwner) { level ->
-            binding.selectedLevel.text = level
-        }
-    }
 
-    // 동화 생성 버튼 상태에 따른 변경
-    private fun setCreateButtonStatus() {
-        vm.isAllGroupSelected.observe(viewLifecycleOwner) { isEnabled ->
-            binding.btnCreate.isClickable = isEnabled
-            binding.btnCreate.setBackgroundResource(
-                if (isEnabled) R.drawable.btn_create_on else R.drawable.btn_create_off
-            )
-        }
+    // 리스너 초기화
+    override fun initListener() {
+        initTextChangedListener()
+        initAddButtonListener()
+        initCancelClickListener()
+        initCreateFairyTaleButtonListener()
     }
-
 
     // 추가 버튼 클릭시 새로운 chip 추가
     private fun setAddButtonClickListener(
@@ -104,25 +85,16 @@ class FairyTaleCreationFragment : Fragment() {
         }
     }
 
-    // 리스너 초기화
-    private fun initListener() {
-        initTextChangedListener()
-        initAddButtonListener()
-        initCancelClickListener()
-        setCreateButtonStatus()
-        initCreateFairyTaleButtonListener()
-    }
-
     // 행맨 게임 인트로 이동
     private fun initCreateFairyTaleButtonListener() {
         binding.btnCreate.setOnClickListener {
             // premium switch 상태 확인
             val isPremium = binding.premiumSwitch.isChecked
 
-            val traits = vm.selectedChipGroup1.value?.map { id -> getChipTextById(binding.chipGroupWho, id) }?: emptyList()
-            val characters = vm.selectedChipGroup2.value?.map { id -> getChipTextById(binding.chipGroupName, id) }?: emptyList()
-            val settings = vm.selectedChipGroup3.value?.map { id -> getChipTextById(binding.chipGroupWhere, id) }?: emptyList()
-            val genre = vm.selectedChipGroup4.value?.map { id -> getChipTextById(binding.chipGroupGenre, id) }?: emptyList()
+            val traits = viewModel.selectedChipGroup1.value?.map { id -> getChipTextById(binding.chipGroupWho, id) }?: emptyList()
+            val characters = viewModel.selectedChipGroup2.value?.map { id -> getChipTextById(binding.chipGroupName, id) }?: emptyList()
+            val settings = viewModel.selectedChipGroup3.value?.map { id -> getChipTextById(binding.chipGroupWhere, id) }?: emptyList()
+            val genre = viewModel.selectedChipGroup4.value?.map { id -> getChipTextById(binding.chipGroupGenre, id) }?: emptyList()
 
             val toIntroHangmanAction = FairyTaleCreationFragmentDirections
                 .actionFairyTaleCreationFragmentToIntroHangmanFragment(
@@ -159,10 +131,10 @@ class FairyTaleCreationFragment : Fragment() {
         }
     }
 
-    // 사용자 입력 필드 텍스트 변경 리스너 (vm에서 업데이트 및 유효성 검사 수행)
+    // 사용자 입력 필드 텍스트 변경 리스너 (viewModel에서 업데이트 및 유효성 검사 수행)
     private fun setTextChangedListener(editText: EditText, chipGroup: ChipGroup, chipGroupNumber: Int) {
         editText.addTextChangedListener { input ->
-            vm.onInputChanged(input.toString(), chipGroup, chipGroupNumber)
+            viewModel.onInputChanged(input.toString(), chipGroup, chipGroupNumber)
         }
     }
 
@@ -184,17 +156,17 @@ class FairyTaleCreationFragment : Fragment() {
 
             customChip.getChip().setOnCheckedChangeListener { _, isChecked ->
                 // Chip 선택 여부를 ViewModel에 알려줌.
-                vm.setChipSelectedState(customChip.id, chipGroupNumber)
+                viewModel.setChipSelectedState(customChip.id, chipGroupNumber)
             }
         }
 
         createPlusChip(chipGroup, getFrameLayoutForChipGroup(chipGroup))
 
         val selectedLiveData = when (chipGroupNumber) {
-            1 -> vm.selectedChipGroup1
-            2 -> vm.selectedChipGroup2
-            3 -> vm.selectedChipGroup3
-            4 -> vm.selectedChipGroup4
+            1 -> viewModel.selectedChipGroup1
+            2 -> viewModel.selectedChipGroup2
+            3 -> viewModel.selectedChipGroup3
+            4 -> viewModel.selectedChipGroup4
             else -> throw IllegalStateException("Invalid chipGroupNumber")
         }
 
@@ -263,13 +235,13 @@ class FairyTaleCreationFragment : Fragment() {
             id = View.generateViewId()
             getChip().setOnClickListener {
                 chipGroup.removeView(this) // 칩 다시 클릭 시 제거
-                vm.setChipSelectedState(this.id, chipGroupNumber) // 상태 업데이트
+                viewModel.setChipSelectedState(this.id, chipGroupNumber) // 상태 업데이트
             }
         }
 
         chipGroup.addView(userChip)
         // 새로운 칩 추가를 viewModel에 반영
-        vm.setChipSelectedState(userChip.id, chipGroupNumber)
+        viewModel.setChipSelectedState(userChip.id, chipGroupNumber)
         // plus칩 다시 생성
         createPlusChip(chipGroup, getFrameLayoutForChipGroup(chipGroup))
     }

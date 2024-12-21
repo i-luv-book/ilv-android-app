@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="fairyTaleCreationViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.creation.viewmodel.FairyTaleCreationViewModel"/>
     </data>
 
@@ -127,8 +127,8 @@
                                     android:layout_width="37dp"
                                     android:layout_height="37dp"
                                     android:layout_marginEnd="4dp"
-                                    android:clickable="@{fairyTaleCreationViewModel.isWhoInputValid()}"
-                                    android:src="@{fairyTaleCreationViewModel.isWhoInputValid ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                    android:clickable="@{viewModel.isWhoInputValid()}"
+                                    android:src="@{viewModel.isWhoInputValid ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
                                     android:background="@android:color/transparent"
                                     android:layout_gravity="center_vertical|end"
                                     />
@@ -211,7 +211,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@drawable/chip_edit_box"
-                                    android:text="@={fairyTaleCreationViewModel.nameInput}"
+                                    android:text="@={viewModel.nameInput}"
                                     android:autofillHints="이름을 입력해 주세요."
                                     android:paddingStart="16dp"
                                     android:paddingEnd="4dp"
@@ -222,8 +222,8 @@
                                     android:layout_width="37dp"
                                     android:layout_height="37dp"
                                     android:layout_marginEnd="4dp"
-                                    android:clickable="@{fairyTaleCreationViewModel.isNameInputValid()}"
-                                    android:src="@{fairyTaleCreationViewModel.isNameInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                    android:clickable="@{viewModel.isNameInputValid()}"
+                                    android:src="@{viewModel.isNameInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
                                     android:layout_gravity="center_vertical|end"
                                     />
                             </FrameLayout>
@@ -316,8 +316,8 @@
                                 android:layout_width="37dp"
                                 android:layout_height="37dp"
                                 android:layout_marginEnd="4dp"
-                                android:clickable="@{fairyTaleCreationViewModel.isWhereInputValid()}"
-                                android:src="@{fairyTaleCreationViewModel.isWhereInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                android:clickable="@{viewModel.isWhereInputValid()}"
+                                android:src="@{viewModel.isWhereInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
                                 android:layout_gravity="center_vertical|end"
                                 />
                         </FrameLayout>
@@ -399,7 +399,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/chip_edit_box"
-                                android:text="@{fairyTaleCreationViewModel.genreInput}"
+                                android:text="@{viewModel.genreInput}"
                                 android:paddingStart="16dp"
                                 android:paddingEnd="4dp"
                                 android:maxLength="15"
@@ -410,8 +410,8 @@
                                 android:layout_width="37dp"
                                 android:layout_height="37dp"
                                 android:layout_marginEnd="4dp"
-                                android:clickable="@{fairyTaleCreationViewModel.isGenreInputValid()}"
-                                android:src="@{fairyTaleCreationViewModel.isGenreInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
+                                android:clickable="@{viewModel.isGenreInputValid()}"
+                                android:src="@{viewModel.isGenreInputValid() ? @drawable/btn_add_active : @drawable/btn_add_inactive}"
                                 android:layout_gravity="center_vertical|end"
                                 />
                         </FrameLayout>

@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="fairyTaleIntroViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.intro.viewmodel.FairyTaleIntroViewModel" />
     </data>
 
@@ -37,7 +37,7 @@
             android:id="@+id/fairytale_intro_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{fairyTaleIntroViewModel.fairyTaleTitle}"
+            android:text="@{viewModel.fairyTaleTitle}"
             android:textAppearance="@style/fairytale_intro_title"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
@@ -66,7 +66,7 @@
             android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toTopOf="@id/btn_read_fairytale"
             style="@style/fairytale_intro_summary_keyword"
-            android:text="@{fairyTaleIntroViewModel.fairyTaleSummary}"
+            android:text="@{viewModel.fairyTaleSummary}"
             app:layout_constraintLeft_toLeftOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageButton

@@ -9,7 +9,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="loadingViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.loading.viewmodel.FairyTaleLoadingViewModel" />
     </data>
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/check_icon"
-            android:visibility="@{loadingViewModel.isLoadingCompleted ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.isLoadingCompleted ? View.VISIBLE : View.GONE}"
             android:layout_marginBottom="32dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -45,7 +45,7 @@
 
         <ImageView
             android:id="@+id/loading_banner"
-            android:visibility="@{loadingViewModel.isLoadingCompleted ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.isLoadingCompleted ? View.GONE : View.VISIBLE}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/fairytale_loading"
@@ -64,7 +64,7 @@
             android:id="@+id/fairytale_loading_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{loadingViewModel.isLoadingCompleted ? @string/fairytale_completed_title : @string/fairytale_loading_title}"
+            android:text="@{viewModel.isLoadingCompleted ? @string/fairytale_completed_title : @string/fairytale_loading_title}"
             android:textAppearance="@style/fairytale_last_page_title"
             android:gravity="center"
             android:layout_marginTop="38dp"
@@ -79,7 +79,7 @@
             android:id="@+id/fairytale_loading_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{loadingViewModel.isLoadingCompleted ? @string/fairytale_completed_body : @string/fairytale_loading_body}"
+            android:text="@{viewModel.isLoadingCompleted ? @string/fairytale_completed_body : @string/fairytale_loading_body}"
             android:layout_marginTop="8dp"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/fairytale_loading_title"
@@ -91,8 +91,8 @@
             android:id="@+id/btn_read_fairytale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{loadingViewModel.isLoadingCompleted ? View.VISIBLE : View.GONE}"
-            android:clickable="@{loadingViewModel.isLoadingCompleted}"
+            android:visibility="@{viewModel.isLoadingCompleted ? View.VISIBLE : View.GONE}"
+            android:clickable="@{viewModel.isLoadingCompleted}"
             android:background="@drawable/btn_read_fairytale"
             android:layout_marginBottom="16dp"
             app:layout_constraintLeft_toLeftOf="parent"

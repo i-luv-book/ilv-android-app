@@ -2,18 +2,15 @@ package com.sangik.iluvbook.hangman.game.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentHangmanBinding
 import com.sangik.iluvbook.hangman.game.viewmodel.HangmanViewModel
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
@@ -22,45 +19,32 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HangmanFragment : Fragment() {
-    private lateinit var hangmanViewModel: HangmanViewModel
-    private lateinit var introViewModel: IntroHangmanViewModel
-    private lateinit var binding: FragmentHangmanBinding
+class HangmanFragment : BaseFragment<FragmentHangmanBinding, HangmanViewModel> (
+    R.layout.fragment_hangman,
+    HangmanViewModel::class,
+) {
+    private lateinit var sharedIntroViewModel: IntroHangmanViewModel
     private val args: HangmanFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hangmanViewModel = ViewModelProvider(this).get(HangmanViewModel::class.java)
-        introViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
+        sharedIntroViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_hangman, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.hangmanViewModel = hangmanViewModel
-
+    override fun initView() {
         setupKeyboard()
-        observeHangmanViewModel()
-
-        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initObserver() {
         observeIntroViewModel()
-        initListener()
+        observeHangmanViewModel()
     }
 
-
-    private fun initListener() {
+    override fun initListener() {
         binding.btnMoveFairytale.setOnClickListener {
             navigateToFairyTaleDetail()
         }
     }
-
     // 동화 상세로 이동
     private fun navigateToFairyTaleDetail() {
         val actionFairyTaleIntro = HangmanFragmentDirections
@@ -76,24 +60,21 @@ class HangmanFragment : Fragment() {
     }
 
     private fun observeIntroViewModel() {
-        introViewModel.apply {
+        sharedIntroViewModel.apply {
             hangmanResponse.observe(viewLifecycleOwner) { response ->
                 response?.let {
-                    hangmanViewModel.setHangmanData(response.word, response.hint) // 행맨 데이터 세팅
+                    viewModel.setHangmanData(response.word, response.hint) // 행맨 데이터 세팅
                     initInput(response.word) // 사용자 입력칸 생성
                 }
             }
-
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
                 response?.let { enableMoveFairyTaleButton() }
             }
-
             fairyTaleSelectionResponse.observe(viewLifecycleOwner) {
                 response -> response?.let { enableMoveFairyTaleButton() }
             }
         }
     }
-
     private fun enableMoveFairyTaleButton() {
         binding.btnMoveFairytale.let {
             it.setBackgroundResource(R.drawable.btn_move_fairytale)
@@ -102,7 +83,7 @@ class HangmanFragment : Fragment() {
     }
     // LiveData 관찰
     private fun observeHangmanViewModel() {
-        hangmanViewModel.apply {
+        viewModel.apply {
             answer.observe(viewLifecycleOwner) { answer ->
                 initInput(answer)
             }
@@ -119,7 +100,7 @@ class HangmanFragment : Fragment() {
             // 게임 완료, 동화 응답이 오지 않았을 때 2초 후 FairyTaleLoading으로 이동
             isGameEnd.observe(viewLifecycleOwner) { isGameEnd ->
                 if (isGameEnd) {
-                    if (introViewModel.fairyTaleResponse.value == null) {
+                    if (sharedIntroViewModel.fairyTaleResponse.value == null) {
                         CoroutineScope(Dispatchers.Main).launch {
                             delay(2000)
                             navigateToFairyTaleLoading()
@@ -156,7 +137,7 @@ class HangmanFragment : Fragment() {
 
     // 키보드에 표시될 문자 관찰
     private fun setupKeyboard() {
-        hangmanViewModel.keyboardChars.observe(viewLifecycleOwner) { chars ->
+        viewModel.keyboardChars.observe(viewLifecycleOwner) { chars ->
                 initKeyboard(chars)
         }
     }
@@ -173,7 +154,7 @@ class HangmanFragment : Fragment() {
 
             keyCapText.text = char.toString()
             keyCapText.setOnClickListener {
-                hangmanViewModel.onKeyClicked(char) // 글자 선택 했을 때 정의
+                viewModel.onKeyClicked(char) // 글자 선택 했을 때 정의
                 keyCapText.apply {
                     setBackgroundColor(Color.TRANSPARENT)
                     setTextColor(

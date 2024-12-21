@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="lastPageVm"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleLastPageViewModel" />
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{lastPageVm.fairyTaleTitle}"
+            android:text="@{viewModel.fairyTaleTitle}"
             android:layout_marginTop="18dp"
             android:textAppearance="@style/fairytale_last_page_title"
             app:layout_constraintBottom_toTopOf="@id/fairy_tale_suggestion"

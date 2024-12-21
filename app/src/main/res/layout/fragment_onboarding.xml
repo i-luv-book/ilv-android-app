@@ -7,7 +7,7 @@
 
     <data>
         <variable
-            name="onboardingViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.onboarding.viewmodel.OnboardingViewModel" />
     </data>
 
