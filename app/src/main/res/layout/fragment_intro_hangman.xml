@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="introHangmanViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel" />
     </data>
 

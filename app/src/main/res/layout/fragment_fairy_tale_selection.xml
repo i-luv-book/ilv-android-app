@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="selectionViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleSelectionViewModel" />
     </data>
 
@@ -32,7 +32,7 @@
                 android:id="@+id/fairy_tale_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{selectionViewModel.fairyTaleTitle}"
+                android:text="@{viewModel.fairyTaleTitle}"
                 android:textAppearance="@style/fairytaleSelectionTitle"
                 android:layout_marginTop="18.5dp"
                 android:gravity="center"
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:layout_marginStart="8dp"
-                    android:text="@{selectionViewModel.options[0].optionTitle}"
+                    android:text="@{viewModel.options[0].optionTitle}"
                     android:gravity="center_vertical"
                     android:textAppearance="@style/fairyTaleOptionTitle"
                     app:layout_constraintLeft_toRightOf="@id/option_a"
@@ -106,7 +106,7 @@
                     android:layout_marginTop="10.5dp"
                     android:lineSpacingExtra="6dp"
                     android:textAppearance="@style/fairyTaleOptionContentOriginal"
-                    android:text="@{selectionViewModel.options[0].optionContent}"
+                    android:text="@{viewModel.options[0].optionContent}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_title"/>
@@ -118,7 +118,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="16dp"
                     android:lineSpacingExtra="6dp"
-                    android:text="@{selectionViewModel.optionATranslated}"
+                    android:text="@{viewModel.optionATranslated}"
                     android:textAppearance="@style/fairyTaleOptionContentKr"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_a_content_original"
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:layout_marginStart="8dp"
-                    android:text="@{selectionViewModel.options[1].optionTitle}"
+                    android:text="@{viewModel.options[1].optionTitle}"
                     android:gravity="center_vertical"
                     android:textAppearance="@style/fairyTaleOptionTitle"
                     app:layout_constraintLeft_toRightOf="@id/option_b"
@@ -169,7 +169,7 @@
                     android:layout_marginTop="10.5dp"
                     android:lineSpacingExtra="6dp"
                 android:textAppearance="@style/fairyTaleOptionContentOriginal"
-                    android:text="@{selectionViewModel.options[1].optionContent}"
+                    android:text="@{viewModel.options[1].optionContent}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_b_title"/>
@@ -182,7 +182,7 @@
                     android:layout_marginBottom="16dp"
                     android:lineSpacingExtra="6dp"
                     android:textAppearance="@style/fairyTaleOptionContentKr"
-                    android:text="@{selectionViewModel.optionBTranslated}"
+                    android:text="@{viewModel.optionBTranslated}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_b_content_original"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
                     android:layout_marginStart="8dp"
-                    android:text="@{selectionViewModel.options[2].optionTitle}"
+                    android:text="@{viewModel.options[2].optionTitle}"
                     android:gravity="center_vertical"
                     android:textAppearance="@style/fairyTaleOptionTitle"
                     app:layout_constraintLeft_toRightOf="@id/option_c"
@@ -232,7 +232,7 @@
                     android:layout_marginTop="10.5dp"
                     android:lineSpacingExtra="6dp"
                     android:textAppearance="@style/fairyTaleOptionContentOriginal"
-                    android:text="@{selectionViewModel.options[2].optionContent}"
+                    android:text="@{viewModel.options[2].optionContent}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_c_title"/>
@@ -245,7 +245,7 @@
                     android:layout_marginBottom="16dp"
                     android:lineSpacingExtra="6dp"
                     android:textAppearance="@style/fairyTaleOptionContentKr"
-                    android:text="@{selectionViewModel.optionCTranslated}"
+                    android:text="@{viewModel.optionCTranslated}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fairy_tale_option_c_content_original"
                     app:layout_constraintLeft_toLeftOf="parent"

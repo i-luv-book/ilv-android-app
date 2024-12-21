@@ -1,69 +1,52 @@
     package com.sangik.iluvbook.fairytale.detail.ui
 
     import android.os.Bundle
-    import android.util.Log
-    import androidx.fragment.app.Fragment
-    import android.view.LayoutInflater
-    import android.view.View
-    import android.view.ViewGroup
-    import androidx.databinding.DataBindingUtil
     import androidx.lifecycle.ViewModelProvider
     import com.sangik.iluvbook.R
+    import com.sangik.iluvbook.base.BaseFragment
     import com.sangik.iluvbook.databinding.FragmentFairyTaleSelectionBinding
     import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleDetailViewModel
     import com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTaleSelectionViewModel
     import com.sangik.iluvbook.fairytale.model.dto.FairyTaleOption
     import com.sangik.iluvbook.fairytale.model.dto.OptionUserSelected
 
-    class FairyTaleSelectionFragment : Fragment() {
-        private lateinit var selectionViewModel : FairyTaleSelectionViewModel
+    class FairyTaleSelectionFragment : BaseFragment<FragmentFairyTaleSelectionBinding, FairyTaleSelectionViewModel>(
+        R.layout.fragment_fairy_tale_selection,
+        FairyTaleSelectionViewModel::class
+    ) {
         private lateinit var detailViewModel : FairyTaleDetailViewModel
-        private lateinit var binding : FragmentFairyTaleSelectionBinding
         private lateinit var options: List<FairyTaleOption>
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
+        override fun initView() {
             options = arguments?.getParcelableArrayList(ARG_OPTION) ?: emptyList()
             detailViewModel = ViewModelProvider(requireActivity()).get(FairyTaleDetailViewModel::class.java)
-            selectionViewModel = ViewModelProvider(requireActivity()).get(FairyTaleSelectionViewModel::class.java)
-            selectionViewModel.initOptions(options)
+            viewModel.initOptions(options)
         }
 
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View {
-
-            binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_fairy_tale_selection, container, false
-            )
-
-            binding.selectionViewModel = selectionViewModel
-
-            binding.lifecycleOwner = viewLifecycleOwner
-
-            observeSelectionViewModel()
-            return binding.root
+        override fun initListener() {
+            binding.optionACard.setOnClickListener {
+                viewModel.toggleOptionSelection(0)
+            }
+            binding.optionBCard.setOnClickListener {
+                viewModel.toggleOptionSelection(1)
+            }
+            binding.optionCCard.setOnClickListener {
+                viewModel.toggleOptionSelection(2)
+            }
         }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-
-            initListener()
-        }
-
-        private fun observeSelectionViewModel() {
+        override fun initObserver() {
             // 옵션 카드 상태 변경
-            selectionViewModel.selectedOptionIndex.observe(viewLifecycleOwner) { selectedIndex ->
+            viewModel.selectedOptionIndex.observe(viewLifecycleOwner) { selectedIndex ->
                 updateOptionCardBackgrounds(selectedIndex)
                 setUserSelectedOption(selectedIndex)
             }
 
             // 사용자 선택 후 새 동화 관련 Response Observing
-            selectionViewModel.fairyTaleSelectionResponseList.observe(viewLifecycleOwner) { response ->
+            viewModel.fairyTaleSelectionResponseList.observe(viewLifecycleOwner) { response ->
                 response?.let {
                     if (it.isNotEmpty()) {
-                        selectionViewModel.setupNewSelectionOption(it.last())
+                        viewModel.setupNewSelectionOption(it.last())
                     }
                 }
             }
@@ -75,9 +58,9 @@
 
                 // 번역된 옵션 내용 설정
                 val translatedContent = when (selectedIndex) {
-                    0 -> selectionViewModel.optionATranslated.value ?: ""
-                    1 -> selectionViewModel.optionBTranslated.value ?: ""
-                    2 -> selectionViewModel.optionCTranslated.value ?: ""
+                    0 -> viewModel.optionATranslated.value ?: ""
+                    1 -> viewModel.optionBTranslated.value ?: ""
+                    2 -> viewModel.optionCTranslated.value ?: ""
                     else -> ""
                 }
 
@@ -103,19 +86,6 @@
             )
         }
 
-        private fun initListener() {
-            binding.apply {
-                optionACard.setOnClickListener {
-                    selectionViewModel?.toggleOptionSelection(0)
-                }
-                optionBCard.setOnClickListener {
-                    selectionViewModel?.toggleOptionSelection(1)
-                }
-                optionCCard.setOnClickListener {
-                    selectionViewModel?.toggleOptionSelection(2)
-                }
-            }
-        }
         companion object {
             private const val ARG_OPTION = "options"
 

@@ -7,7 +7,7 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="pageViewModel"
+            name="viewModel"
             type="com.sangik.iluvbook.fairytale.detail.viewmodel.FairyTalePageViewModel" />
 
         <variable
@@ -24,7 +24,7 @@
             android:id="@+id/fairy_tale_page_title"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="@{pageViewModel.fairyTaleTitle}"
+            android:text="@{viewModel.fairyTaleTitle}"
             android:gravity="center"
             android:layout_marginTop="18dp"
             android:translationZ="2dp"
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_translation"
-                android:onClick="@{() -> pageViewModel.toggleTranslateButton()}"
+                android:onClick="@{() -> viewModel.toggleTranslateButton()}"
                 android:layout_marginEnd="10dp"
                 android:contentDescription="@string/translate" />
 
@@ -145,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_tts"
-                android:onClick="@{() -> pageViewModel.toggleTTSButton()}"
+                android:onClick="@{() -> viewModel.toggleTTSButton()}"
                 android:contentDescription="@string/volume" />
         </LinearLayout>
 
@@ -168,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4sp"
                 android:textAppearance="@style/fairytale_detail_content"
-                android:text="@{pageViewModel.pageContent}"
+                android:text="@{viewModel.pageContent}"
                 />
 
         </ScrollView>

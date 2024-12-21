@@ -1,59 +1,33 @@
 package com.sangik.iluvbook.fairytale.loading.ui
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionManager
 import com.sangik.iluvbook.R
+import com.sangik.iluvbook.base.BaseFragment
 import com.sangik.iluvbook.databinding.FragmentFairyTaleLoadingBinding
 import com.sangik.iluvbook.fairytale.loading.viewmodel.FairyTaleLoadingViewModel
 import com.sangik.iluvbook.hangman.intro.viewmodel.IntroHangmanViewModel
 
-class FairyTaleLoadingFragment : Fragment() {
-    private lateinit var binding: FragmentFairyTaleLoadingBinding
-    private lateinit var fairyTaleLoadingViewModel: FairyTaleLoadingViewModel
+class FairyTaleLoadingFragment : BaseFragment<FragmentFairyTaleLoadingBinding, FairyTaleLoadingViewModel>(
+    R.layout.fragment_fairy_tale_loading,
+    FairyTaleLoadingViewModel::class
+) {
     private lateinit var introViewModel: IntroHangmanViewModel
     private val args: FairyTaleLoadingFragmentArgs by navArgs()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fairyTaleLoadingViewModel = ViewModelProvider(this).get(FairyTaleLoadingViewModel::class.java)
 
+    override fun initView() {
         introViewModel = ViewModelProvider(requireActivity()).get(IntroHangmanViewModel::class.java)
-
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_fairy_tale_loading,
-            container,
-            false
-        )
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.loadingViewModel = fairyTaleLoadingViewModel
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initListener()
+    override fun initObserver() {
         observeIntroViewModel()
-        observeLoadingState() // 상태 관찰 시작
+        observeLoadingState()
     }
 
-    private fun initListener() {
+    override fun initListener() {
         binding.btnReadFairytale.setOnClickListener {
             handleFairyTaleIntroNavigation()
         }
@@ -64,12 +38,12 @@ class FairyTaleLoadingFragment : Fragment() {
         introViewModel.apply {
             fairyTaleResponse.observe(viewLifecycleOwner) { response ->
                 response?.let {
-                    fairyTaleLoadingViewModel.updateLoadingState() // 동화 생성 완료 UI로 업데이트
+                    viewModel.updateLoadingState() // 동화 생성 완료 UI로 업데이트
                 }
             }
             fairyTaleSelectionResponse.observe(viewLifecycleOwner) { response ->
                 response?.let {
-                    fairyTaleLoadingViewModel.updateLoadingState()
+                    viewModel.updateLoadingState()
                 }
             }
         }
@@ -77,7 +51,7 @@ class FairyTaleLoadingFragment : Fragment() {
 
     // 로딩 상태 변화 관찰
     private fun observeLoadingState() {
-        fairyTaleLoadingViewModel.isLoadingCompleted.observe(viewLifecycleOwner) { isCompleted ->
+        viewModel.isLoadingCompleted.observe(viewLifecycleOwner) { isCompleted ->
             if (isCompleted) {
                 updateLoadingBannerUi() // 제약 조건 및 애니메이션 적용
             }
